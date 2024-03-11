@@ -1,14 +1,13 @@
 <template>
-  <nav>
-    <div class="mx-auto max-width-7xl"></div>
-    <h1 class="font-bold text-yellow-400 underline">KEKW</h1>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <Navbar />
   <router-view />
 </template>
 
-//
+<script setup>
+import Navbar from './Layout/Navbar.vue';
+
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
