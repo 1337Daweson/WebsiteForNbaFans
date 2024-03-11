@@ -5,11 +5,13 @@ import PrimeVue from "primevue/config";
 import Button from "primevue/button";
 import Lara from "@/presets/lara";
 import "./style.css";
+import { createPinia } from 'pinia';
 
 const app = createApp(App);
+const pinia = createPinia();
 app.use(PrimeVue, {
   unstyled: true,
   pt: Lara,
 });
 app.component("ButtonPrimeVue", Button);
-app.use(router).mount("#app");
+app.use(pinia).use(router).mount("#app");
