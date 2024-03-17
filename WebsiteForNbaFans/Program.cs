@@ -18,6 +18,8 @@ namespace WebsiteForNbaFans
             builder.Configuration.SetBasePath(System.AppContext.BaseDirectory).AddJsonFile("appsettings.json");
             builder.Services.Configure<Api>(builder.Configuration.GetSection("Api"));
 
+            builder.Services.AddHttpClient();
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddSpaStaticFiles(configuration =>
@@ -37,11 +39,11 @@ namespace WebsiteForNbaFans
 
 
 
-            builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
-            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            //builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
+            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //builder.Services.AddScoped<ITeamOperation, TeamOperation>();
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<ITeamOperation, TeamOperation>();
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 

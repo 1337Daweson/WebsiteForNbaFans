@@ -1,13 +1,13 @@
 <script setup>
 import { RouterView } from 'vue-router';
-// import HelloWorld from './components/HelloWorld.vue';
 import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <Navbar />
-  <RouterView />
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
+  <div class="text-black">
+    <Navbar />
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
@@ -23,4 +23,6 @@ import Navbar from './components/Navbar.vue';
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+
+
 </style>
