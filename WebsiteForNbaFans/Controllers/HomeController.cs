@@ -4,6 +4,8 @@ using System.Net.Http.Headers;
 using System;
 using WebsiteForNbaFans.Models;
 using WebsiteForNbaFans.Operations;
+using WebsiteForNbaFans.Helpers.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace WebsiteForNbaFans.Controllers
 {
@@ -11,15 +13,13 @@ namespace WebsiteForNbaFans.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        private readonly string URL = "https://api.balldontlie.io/v1/teams";
-        private readonly string KEY = "6bcf5679-4a0d-4832-9a2b-974a22fb1478";
-        private readonly int PAGE = 1;
-        private readonly int PAGE_SIZE = 10;
         private readonly ITeamOperation operation;
+        private readonly Api appSettings;
 
-        public HomeController(ITeamOperation operation)
+        public HomeController(ITeamOperation operation, IOptions<Api> appSettings)
         {
             this.operation = operation;
+            this.appSettings = appSettings.Value;
         }
 
         [HttpGet(nameof(Test))]
@@ -32,15 +32,15 @@ namespace WebsiteForNbaFans.Controllers
         [HttpGet(nameof(Teams))]
         public async Task<IActionResult> Teams(int page, int pageSize)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", KEY);
-            string url = $"{URL}?page={page}&per_page={pageSize}";
-            var response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
+            var response = await Helpers.ApiHelper.GetResponse(page, pageSize, appSettings.ApiKey, appSettings.ApiUrl, "teams");
+            return Ok(response);
+        }
 
-            client.Dispose();
-            return Ok(responseBody);
+        [HttpGet(nameof(TeamById))]
+        public async Task<IActionResult> TeamById(int id, int page, int pageSize)
+        {
+            var response = await Helpers.ApiHelper.GetResponse(page, pageSize, appSettings.ApiKey, appSettings.ApiUrl, "teams",id);
+            return Ok(response);
         }
     }
 }

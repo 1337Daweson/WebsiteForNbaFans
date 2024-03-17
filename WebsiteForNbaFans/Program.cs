@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using WebsiteForNbaFans.Helpers.Configuration;
 using WebsiteForNbaFans.Models;
 using WebsiteForNbaFans.Operations;
 using WebsiteForNbaFans.Repositories;
@@ -9,7 +11,12 @@ namespace WebsiteForNbaFans
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
+
+
+            builder.Configuration.SetBasePath(System.AppContext.BaseDirectory).AddJsonFile("appsettings.json");
+            builder.Services.Configure<Api>(builder.Configuration.GetSection("Api"));
 
             // Add services to the container.
             builder.Services.AddControllers();
@@ -27,6 +34,9 @@ namespace WebsiteForNbaFans
 
             // DbContext
             var connectionString = builder.Configuration.GetConnectionString("NbaWeb");
+
+
+
             builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
@@ -51,10 +61,10 @@ namespace WebsiteForNbaFans
             app.UseSpaStaticFiles();
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "client-app";
                 if (app.Environment.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
                 }
             });
 
