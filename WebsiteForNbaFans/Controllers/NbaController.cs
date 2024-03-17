@@ -13,7 +13,6 @@ namespace WebsiteForNbaFans.Controllers
     [Route("[controller]")]
     public class NbaController : ControllerBase
     {
-        //private readonly ITeamOperation operation;
         private readonly Api appSettings;
         private readonly IHttpClientFactory clientFactory; 
 
