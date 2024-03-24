@@ -1,14 +1,13 @@
 <template>
-  <h1>HOME HOME</h1>
-  <div class="flex flex-row">
-    <span>hihi</span>
-    <span>hehe</span>
+  <div>
+    <ArticlesComponent />
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { useTeamStore } from '../stores/teamStore';
+import ArticlesComponent from '../components/ArticlesComponent.vue';
 
 const store = useTeamStore();
 

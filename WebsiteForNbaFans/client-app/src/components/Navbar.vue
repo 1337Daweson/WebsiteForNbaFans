@@ -9,22 +9,29 @@ const items = ref([
       icon: 'custom-icon',
       command: () => {
         router.push('/');
-      }
+      },
     },
     {
-      label: 'About',
+      label: 'O nás',
       icon: 'pi pi-link',
       command: () => {
         router.push('/about');
-      }
+      },
     },
     {
-      label: 'Teams',
+      label: 'Týmy',
       icon: 'pi pi-link',
       command: () => {
         router.push('/teams');
-      }
-    }
+      },
+    },
+    {
+      label: 'Tabulky',
+      icon: 'pi pi-link',
+      command: () => {
+        router.push('/standings');
+      },
+    },
 ]);
 
 </script>

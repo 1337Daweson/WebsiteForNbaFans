@@ -10,6 +10,9 @@ import Menubar from 'primevue/menubar';
 import Column from 'primevue/column';
 import DataView from 'primevue/dataview';
 import Button from 'primevue/button';
+import Paginator from 'primevue/paginator';
+import Carousel from 'primevue/carousel';
+import Card from 'primevue/card';
 
 const pinia = createPinia();
 
@@ -17,15 +20,17 @@ const app = createApp(App);
 app.use(router);
 app.use(PrimeVue, {
     unstyled: true,
-    pt: Lara
+    pt: Lara,
 });
 app.use(pinia);
 
 app.component('DataTable', DataTable);
 app.component('MenuBar', Menubar);
-// eslint-disable-next-line vue/multi-word-component-names
-app.component('Column', Column);
+app.component('PrimeColumn', Column);
 app.component('DataView', DataView);
 app.component('PrimeButton', Button);
+app.component('PrimePaginator', Paginator);
+app.component('PrimeCarousel', Carousel);
+app.component('PrimeCard', Card);
 
 app.mount('#app');

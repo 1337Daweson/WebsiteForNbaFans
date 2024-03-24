@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using WebsiteForNbaFans.Helpers.Configuration;
 using WebsiteForNbaFans.Models;
 using WebsiteForNbaFans.Operations;
+using WebsiteForNbaFans.Operations.RapidAPI;
 using WebsiteForNbaFans.Repositories;
 
 namespace WebsiteForNbaFans
@@ -42,6 +44,20 @@ namespace WebsiteForNbaFans
             //builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             //builder.Services.AddScoped<ITeamOperation, TeamOperation>();
+            //builder.Services.AddTransient<IRapidApiOperation, RapidApiOperation>();
+
+            builder.Services.AddHttpClient("RapidApiOperation", (serviceProvider, client) =>
+            {
+                var settings = serviceProvider.GetRequiredService<IOptions<Api>>().Value;
+
+                client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "bd1b6dbc0fmsh7127f53a0567a3fp186c00jsn4e252554a54b");
+                client.DefaultRequestHeaders.Add("X-RapidAPI-Host", settings.RapidHost);
+
+                client.BaseAddress = new Uri($"https://{settings.RapidHost}");
+
+            });
+
+            builder.Services.AddScoped<IRapidApiOperation, RapidApiOperation>();
 
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

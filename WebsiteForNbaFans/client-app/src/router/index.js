@@ -3,34 +3,46 @@ import HomePage from '../pages/HomePage.vue';
 import AboutPage from '../pages/AboutPage.vue';
 import TeamsPage from '../pages/TeamsPage.vue';
 import TeamDetail from '../pages/TeamDetail.vue';
+import PlayerDetail from '../pages/PlayerDetail.vue';
+import StandingsPage from '../pages/StandingsPage.vue';
 
 
 const routes = [
     {
         path: '/',
         name: 'Domov',
-        component: HomePage
+        component: HomePage,
     },
     {
         path: '/about',
         name: 'O nás',
-        component: AboutPage
+        component: AboutPage,
     },
     {
         path: '/teams',
         name: 'Týmy',
-        component: TeamsPage
+        component: TeamsPage,
     },
     {
-        path: '/teams/:id',
+        path: '/team/:id',
         name: 'Tým',
-        component: TeamDetail
-    }
+        component: TeamDetail,
+    },
+    {
+        path: '/player/:playerId',
+        name: 'Hráč',
+        component: PlayerDetail,
+    },
+    {
+        path: '/standings',
+        name: 'Tabulky',
+        component: StandingsPage,
+    },
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 export default router;

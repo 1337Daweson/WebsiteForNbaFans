@@ -11,7 +11,7 @@ export default class HttpRequestor {
   static #API_URL = 'http://localhost:5121';
 
   static #AXIOS_REQUEST_CONFIG = {
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   };
 
   /**
@@ -44,8 +44,8 @@ export default class HttpRequestor {
     params;
     return this.#axios.get(
       url, {
-        params
-      }
+        params,
+      },
     );
   }
 
@@ -66,8 +66,8 @@ export default class HttpRequestor {
       data,
       {
         ...this.#AXIOS_REQUEST_CONFIG,
-        params
-      }
+        params,
+      },
     );
   }
 }

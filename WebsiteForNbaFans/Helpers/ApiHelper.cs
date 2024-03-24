@@ -35,6 +35,5 @@ namespace WebsiteForNbaFans.Helpers
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
-
     }
 }
