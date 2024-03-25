@@ -14,7 +14,7 @@
       currentPageReportTemplate="{first} do {last} z {totalRecords}"
       class="m-4 p-4"
     >
-      <Column
+      <PrimeColumn
         field="firstname"
         header="Hráč"
         class="w-3/12"
@@ -29,21 +29,21 @@
             @click="getPlayer(slotProps.data.id)"
           /> -->
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column
+      <PrimeColumn
         field="leagues.standard.jersey"
         header="Dres"
         class="w-1/12"
         :sortable="true"
       />
-      <Column
+      <PrimeColumn
         field="leagues.standard.pos"
         header="Pozice"
         class="w-1/12"        
       />
 
-      <Column       
+      <PrimeColumn       
         field="height.meters"
         header="Výška"
         :sortable="true"
@@ -51,9 +51,9 @@
         <template #body="slotProps">
           <span>{{ slotProps.data.height.meters }}m</span>
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column
+      <PrimeColumn
         field="weight.kilograms"
         header="Váha"
         :sortable="true"       
@@ -61,9 +61,9 @@
         <template #body="slotProps">
           <span>{{ slotProps.data.weight.kilograms }}kg</span>
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column
+      <PrimeColumn
         field="birth.date"
         header="Datum narození"
         class="w-1/3"
@@ -71,9 +71,9 @@
         <template #body="slotProps">
           {{ DateTransformer.toCzLocale(slotProps.data.birth.date) }}
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column
+      <PrimeColumn
         field="birth.date"
         header="Věk"
         :sortable="true" 
@@ -81,9 +81,9 @@
         <template #body="slotProps">
           {{ DateTransformer.getAge(slotProps.data.birth.date) }}
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column 
+      <PrimeColumn 
         field="nba.start"
         header="Zkušenosti"
         class="text-center"
@@ -91,9 +91,9 @@
         <template #body="slotProps">
           {{ DateTransformer.yearsInLeague(slotProps.data.nba.start) }}
         </template>
-      </Column>
+      </PrimeColumn>
 
-      <Column 
+      <PrimeColumn 
         field="college"
         header="Škola"
         class="w-1/3"

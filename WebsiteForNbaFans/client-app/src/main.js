@@ -13,6 +13,7 @@ import Button from 'primevue/button';
 import Paginator from 'primevue/paginator';
 import Carousel from 'primevue/carousel';
 import Card from 'primevue/card';
+import ProgressSpinner from 'primevue/progressspinner';
 
 const pinia = createPinia();
 
@@ -32,5 +33,6 @@ app.component('PrimeButton', Button);
 app.component('PrimePaginator', Paginator);
 app.component('PrimeCarousel', Carousel);
 app.component('PrimeCard', Card);
+app.component('ProgressSpinner', ProgressSpinner);
 
 app.mount('#app');

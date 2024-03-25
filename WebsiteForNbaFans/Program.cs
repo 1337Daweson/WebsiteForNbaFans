@@ -4,6 +4,7 @@ using System.Reflection;
 using WebsiteForNbaFans.Helpers.Configuration;
 using WebsiteForNbaFans.Models;
 using WebsiteForNbaFans.Operations;
+using WebsiteForNbaFans.Operations.Caching;
 using WebsiteForNbaFans.Operations.RapidAPI;
 using WebsiteForNbaFans.Repositories;
 
@@ -44,8 +45,8 @@ namespace WebsiteForNbaFans
             //builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             //builder.Services.AddScoped<ITeamOperation, TeamOperation>();
-            //builder.Services.AddTransient<IRapidApiOperation, RapidApiOperation>();
-
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<ICacher, Cacher>();
             builder.Services.AddHttpClient("RapidApiOperation", (serviceProvider, client) =>
             {
                 var settings = serviceProvider.GetRequiredService<IOptions<Api>>().Value;
