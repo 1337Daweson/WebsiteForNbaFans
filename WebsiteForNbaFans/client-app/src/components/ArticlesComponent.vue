@@ -22,13 +22,13 @@
         </template>
         <template #footer>
           <div class="flex gap-3 mt-1">
-            <Button
+            <PrimeButton
               label="Cancel"
               severity="secondary"
               outlined
               class="w-full"
             />
-            <Button
+            <PrimeButton
               label="Save"
               class="w-full"
             />
@@ -56,13 +56,13 @@
         </template>
         <template #footer>
           <div class="flex gap-3 mt-1">
-            <Button
+            <PrimeButton
               label="Cancel"
               severity="secondary"
               outlined
               class="w-full"
             />
-            <Button
+            <PrimeButton
               label="Save"
               class="w-full"
             />
@@ -92,13 +92,13 @@
         </template>
         <template #footer>
           <div class="flex gap-3 mt-1">
-            <Button
+            <PrimeButton
               label="Cancel"
               severity="secondary"
               outlined
               class="w-full"
             />
-            <Button
+            <PrimeButton
               label="Save"
               class="w-full"
             />
@@ -126,13 +126,13 @@
         </template>
         <template #footer>
           <div class="flex gap-3 mt-1">
-            <Button
+            <PrimeButton
               label="Cancel"
               severity="secondary"
               outlined
               class="w-full"
             />
-            <Button
+            <PrimeButton
               label="Save"
               class="w-full"
             />

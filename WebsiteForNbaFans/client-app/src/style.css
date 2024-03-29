@@ -6,9 +6,33 @@
 
 :root {
 
+  --primary-50: 236 253 245;
+    --primary-100: 209 250 229;
+    --primary-200: 167 243 208;
+    --primary-300: 110 231 183;
+    --primary-400: 52 211 153;
+    --primary-500: 16 185 129;
+    --primary-600: 5 150 105;
+    --primary-700: 4 120 87;
+    --primary-800: 6 95 70;
+    --primary-900: 4 78 56;
+    --primary-950: 2 44 34;
+    --surface-0: 255 255 255;
+    --surface-50: 248 250 252;
+    --surface-100: 241 245 249;
+    --surface-200: 226 232 240;
+    --surface-300: 203 213 225;
+    --surface-400: 148 163 184;
+    --surface-500: 100 116 139;
+    --surface-600: 71 85 105;
+    --surface-700: 45 55 72;
+    --surface-800: 30 41 59;
+    --surface-900: 15 23 42;
+    --surface-950: 3 6 23;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  color: black;
+  color: #1a1a1a;
   background-color: #f6f6f6;
   color-scheme: light;
   
@@ -29,17 +53,30 @@ a {
   color: #1a1a1a;
   text-decoration: inherit;
 }
-a:hover {
-  color: slategray;
-  text-decoration: underline;
-}
 
-
-/* body {
+body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-} */
+}
+
+.p-datatable-header {
+  background-color: white;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: white !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th.p-sortable-column:hover {
+  background-color: #f6f6f6 !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  /*#dfe7f1*/
+  
+  background-color: #b6d6c4 !important;
+}
 
 button {
   border-radius: 8px;
@@ -48,12 +85,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
@@ -67,6 +100,15 @@ button:focus-visible {
 @media (prefers-color-scheme: dark) {
   .dark\:text-white\/70 {
     color: #1a1a1a !important;
+    background-color: white !important;
+  }
+
+  .dark\:hover\:bg-black\/40:hover {
+    background-color: white !important;
+  }
+
+  .dark\:hover\:bg-black\/40 {
+    background-color: white !important;
   }
   
   .dark\:text-white\/60 {

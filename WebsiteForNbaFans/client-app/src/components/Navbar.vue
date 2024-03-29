@@ -13,25 +13,38 @@ const items = ref([
     },
     {
       label: 'O nás',
-      icon: 'pi pi-link',
       command: () => {
         router.push('/about');
       },
     },
     {
       label: 'Týmy',
-      icon: 'pi pi-link',
       command: () => {
         router.push('/teams');
       },
     },
     {
       label: 'Tabulky',
-      icon: 'pi pi-link',
       command: () => {
         router.push('/standings');
       },
     },
+    {
+    label: 'Statistiky',
+    command: () => {
+    router.push('/stats');
+    },
+    items: [
+    {
+      label: 'Styled',
+      route: '/theming',
+    },
+    {
+      label: 'Unstyled',
+      route: '/unstyled',
+    },
+  ],
+ },
 ]);
 
 </script>
@@ -40,7 +53,7 @@ const items = ref([
 <template>
   <div class="card bg-white">
     <MenuBar
-      class="flex flex-row justify-center"
+      class="flex flex-row justify-center bg-white"
       :model="items"
     >
       <template #item="{ item, props, hasSubmenu }">
@@ -57,10 +70,7 @@ const items = ref([
             @click="navigate"
           >
             <span :class="item.icon" />
-            <span
-              v-if="item.label"
-              class="ml-2"
-            >{{ item.label }}</span>
+            <span class="ml-2">{{ item.label }}</span>
           </a>
         </router-link>
         <a
@@ -71,10 +81,7 @@ const items = ref([
           v-bind="props.action"
         >
           <span :class="item.icon" />
-          <span
-            v-if="item.label"
-            class="ml-2"
-          >{{ item.label }}</span>
+          <span class="customLink">{{ item.label }}</span>
           <span
             v-if="hasSubmenu"
             class="pi pi-fw pi-angle-down ml-2"
@@ -96,5 +103,24 @@ const items = ref([
 
 a:hover {
   text-decoration: none;
+}
+
+.customLink::before {
+ content: '';
+ position: absolute;
+ width: 100%;
+ height: 4px;
+ border-radius: 4px;
+ background-color: #18272F;
+ bottom: 0;
+ left: 0;
+ transform-origin: right;
+ transform: scaleX(0);
+ transition: transform .3s ease-in-out;
+}
+
+.customLink:hover::before {
+ transform-origin: left;
+ transform: scaleX(1);
 }
 </style>

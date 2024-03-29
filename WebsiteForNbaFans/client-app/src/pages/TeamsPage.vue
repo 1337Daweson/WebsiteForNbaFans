@@ -1,13 +1,15 @@
 <template>
+  <LoadingModal :loaded="loaded" />
   <div class="bg-white w-1/2 m-auto p-auto mt-10">
-    <h1 class="mb-5 p-3 font-bold text-3xl">
-      TÝMY
+    <h1 class="pl-6 pt-4 mb-2 font-bold text-3xl">
+      Všechny Týmy
     </h1>
+    <hr class="mx-5">
     <div class="grid grid-cols-3 place-items-center h-full w-full p-2">
       <div
         v-for="(teams, division) in sortedGroupedTeams"
         :key="division"
-        class="mb-8"
+        class="mb-8 w-full pl-5"
       >
         <h2 class="text-2xl font-bold mb-5">
           {{ translateDivision(division) }}
@@ -36,12 +38,13 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted  } from 'vue';
 import { useTeamStore } from '../stores/teamStore';
 export default {
   setup() {
     const store = useTeamStore();
     const teams = computed(() => store.NbaTeams);
+    const loaded = computed(() => store.loaded);
 
     const groupedTeams = computed(() => {
       return teams.value.reduce((acc, team) => {
@@ -61,6 +64,8 @@ export default {
           return acc;
         }, {});
     });
+
+
 
     const translateDivision = (division) => {
       switch (division) {
@@ -89,6 +94,7 @@ export default {
       teams,
       groupedTeams,
       sortedGroupedTeams,
+      loaded,
       translateDivision,
     };
 
@@ -96,7 +102,30 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+
+.loading-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ z-index: 9999; /* Ensure it's above other content */
+}
+
+.loading-container::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+ z-index: -1; /* Ensure it's behind the spinner */
+}
 
 </style>
 

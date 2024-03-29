@@ -11,7 +11,16 @@ import ArticlesComponent from '../components/ArticlesComponent.vue';
 
 const store = useTeamStore();
 
-onMounted(() => store.getTeams());
+const getTeamIds = async () => {
+  store.NbaTeams.forEach(async team => {
+    await store.getPlayersStats(team.id);
+  });
+};
+
+onMounted(async () =>{
+  // await store.getTeams();
+  await getTeamIds();
+});
 </script>
 
 <style scoped>

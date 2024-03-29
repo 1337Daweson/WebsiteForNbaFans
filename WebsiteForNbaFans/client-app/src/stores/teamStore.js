@@ -8,6 +8,7 @@ export const useTeamStore = defineStore('teamStore', {
         currentTeam: null,
         roster: [],
         currentPlayer: null,
+        playersStats: [],
     }),
 
     actions: {
@@ -56,6 +57,17 @@ export const useTeamStore = defineStore('teamStore', {
                 this.loaded = true;
             }
             
+        },
+        async getPlayersStats(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/PlayersStatsByTeam', { teamId: id });
+                this.playersStats = [...this.playersStats, ...response.data.response];
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
         },
     },
     getters: {

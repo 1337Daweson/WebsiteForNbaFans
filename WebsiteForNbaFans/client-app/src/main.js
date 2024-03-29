@@ -3,7 +3,7 @@ import './style.css';
 import App from './App.vue';
 import router from './router';
 import PrimeVue from 'primevue/config';
-import Lara from '../src/presets/lara';
+import Lara from '../src/presets/wind';
 import { createPinia } from 'pinia';
 import DataTable from 'primevue/datatable';
 import Menubar from 'primevue/menubar';
@@ -14,17 +14,19 @@ import Paginator from 'primevue/paginator';
 import Carousel from 'primevue/carousel';
 import Card from 'primevue/card';
 import ProgressSpinner from 'primevue/progressspinner';
+import LoadingModal from '../src/composables/LoadingModal.vue';
+import 'primevue/resources/themes/lara-light-green/theme.css';
 
 const pinia = createPinia();
 
 const app = createApp(App);
 app.use(router);
 app.use(PrimeVue, {
-    unstyled: true,
     pt: Lara,
 });
 app.use(pinia);
 
+app.component('LoadingModal', LoadingModal);
 app.component('DataTable', DataTable);
 app.component('MenuBar', Menubar);
 app.component('PrimeColumn', Column);

@@ -5,6 +5,7 @@ import TeamsPage from '../pages/TeamsPage.vue';
 import TeamDetail from '../pages/TeamDetail.vue';
 import PlayerDetail from '../pages/PlayerDetail.vue';
 import StandingsPage from '../pages/StandingsPage.vue';
+import StatsPage from '../pages/StatsPage.vue';
 
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
         path: '/standings',
         name: 'Tabulky',
         component: StandingsPage,
+    },
+    {
+        path: '/stats',
+        name: 'Statistika',
+        component: StatsPage,
     },
 ];
 
