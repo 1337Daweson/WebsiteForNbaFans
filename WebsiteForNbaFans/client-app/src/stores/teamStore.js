@@ -9,6 +9,8 @@ export const useTeamStore = defineStore('teamStore', {
         roster: [],
         currentPlayer: null,
         playersStats: [],
+        teamsStats: [],
+        games: [],
     }),
 
     actions: {
@@ -61,8 +63,37 @@ export const useTeamStore = defineStore('teamStore', {
         async getPlayersStats(id) {
             try {
                 this.loaded = false;
-                const response = await HttpRequestor.get('Nba/PlayersStatsByTeam', { teamId: id });
+                const response = await HttpRequestor.get('Nba/PlayersStats', { teamId: id });
                 this.playersStats = [...this.playersStats, ...response.data.response];
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+        async getTeamsStats(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/TeamsStats', { teamId: id });
+                const newTeamsStats = response.data.response.map(teamStats => {
+                    return {
+                        id, 
+                        stats: teamStats,
+                    };
+                });
+                // Merge the new teams stats with the existing ones using the spread operator
+                this.teamsStats = [...this.teamsStats, ...newTeamsStats];
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+        async getGamesPerSeason() {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/GamesPerSeason');
+                this.games = response.data.response;
             } catch (error) {
                 console.error(error);
             } finally {
@@ -73,5 +104,6 @@ export const useTeamStore = defineStore('teamStore', {
     getters: {
         NbaTeams: (state) => state.teams.filter(team => team.nbaFranchise === true && team.name !== 'Home Team Stephen A'),
         currentActiveRoster: (state) => state.roster.filter(player => player.nba.pro !== 0 && player.nba.start !== 0 ),
+        finishedGames: (state) => state.games.filter(game => game.status.long === 'Finished'),
     },
 });

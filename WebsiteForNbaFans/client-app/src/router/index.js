@@ -5,7 +5,8 @@ import TeamsPage from '../pages/TeamsPage.vue';
 import TeamDetail from '../pages/TeamDetail.vue';
 import PlayerDetail from '../pages/PlayerDetail.vue';
 import StandingsPage from '../pages/StandingsPage.vue';
-import StatsPage from '../pages/StatsPage.vue';
+import PlayersStatsPage from '../pages/stats/PlayersStatsPage.vue';
+import TeamsStatsPage from '../pages/stats/TeamsStatsPage.vue';
 
 
 const routes = [
@@ -40,9 +41,14 @@ const routes = [
         component: StandingsPage,
     },
     {
-        path: '/stats',
-        name: 'Statistika',
-        component: StatsPage,
+        path: '/stats-players',
+        name: 'Statistika - hráči',
+        component: PlayersStatsPage,
+    },
+    {
+        path: '/stats-teams',
+        name: 'Statistika - týmy',
+        component: TeamsStatsPage,
     },
 ];
 

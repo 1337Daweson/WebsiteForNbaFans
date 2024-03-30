@@ -16,6 +16,8 @@ namespace WebsiteForNbaFans.Operations.RapidAPI
         Task<string> GetPlayerStatistics(int playerId, int season = 2023);
         Task<string> GetStandings(int season = 2023);
         Task<string> GetPlayersStats(int teamId, int season = 2023);
+        Task<string> GetTeamsStats(int teamId, int season = 2023);
+        Task<string> GetGamesPerSeason(int season = 2023);
     };
 
     public class RapidApiOperation : IRapidApiOperation
@@ -99,6 +101,23 @@ namespace WebsiteForNbaFans.Operations.RapidAPI
         {
             // players/statistics?team=1&season=2020
             string url = $"/players/statistics?team={teamId}&season={season}";
+            var response = await this._client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<string> GetTeamsStats(int teamId, int season = 2023)
+        {
+            // players/statistics?team=1&season=2020
+            string url = $"/teams/statistics?id={teamId}&season={season}";
+            var response = await this._client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<string> GetGamesPerSeason(int season = 2023)
+        {
+            string url = $"/games?season={season}";
             var response = await this._client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();

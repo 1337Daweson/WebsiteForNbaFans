@@ -207,8 +207,8 @@
 </template>
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import { useTeamStore } from '../stores/teamStore';
-import { PlayerStatsCalculator } from '../services/PlayerStatsHelper.js';
+import { useTeamStore } from '@/stores/teamStore';
+import { StatsCalculator } from '@/services/StatsHelper.js';
 
 // continue with stats
 // https://www.phind.com/search?cache=c7pk8u3evr4v8wxnppgc5ct6
@@ -216,7 +216,7 @@ const store = useTeamStore();
 const stats = computed(() => store.playersStats);
 const teams = computed(() => store.NbaTeams);
 const loaded = computed(() => store.loaded);
-const transformedStats = computed(() => PlayerStatsCalculator.calculatePlayerStats(stats.value));
+const transformedStats = computed(() => StatsCalculator.calculatePlayerStats(stats.value));
 
 const glossaryItems = [
   { term: 'GP', definition: 'Games Played - Odehrané zápasy' },
@@ -269,6 +269,7 @@ onMounted(async () => {
   border-color: #dfe7f1;
   outline-width: 0cm;
   outline-offset: 0cm;
+  
 }
 
 .gloss:hover {

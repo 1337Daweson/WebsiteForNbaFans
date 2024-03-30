@@ -113,19 +113,6 @@ namespace WebsiteForNbaFans.Controllers
             return Ok(response);
         }
 
-        [HttpGet(nameof(PlayersStatsByTeam))]
-        public async Task<IActionResult> PlayersStatsByTeam(int teamId)
-        {
-            if (cacher.TryGetValue("stats" + teamId, out string data))
-            {
-                return Ok(data);
-            }
-
-            var response = await this.apiOperation.GetPlayersStats(teamId);
-            cacher.Set("stats" + teamId, response);
-
-            return Ok(response);
-        }
 
         [HttpGet(nameof(Standings))]
         public async Task<IActionResult> Standings()
@@ -141,6 +128,47 @@ namespace WebsiteForNbaFans.Controllers
             return Ok(response);
         }
 
+        [HttpGet(nameof(PlayersStats))]
+        public async Task<IActionResult> PlayersStats(int teamId)
+        {
+            if (cacher.TryGetValue("stats" + teamId, out string data))
+            {
+                return Ok(data);
+            }
+
+            var response = await this.apiOperation.GetPlayersStats(teamId);
+            cacher.Set("stats" + teamId, response);
+
+            return Ok(response);
+        }
+
+        [HttpGet(nameof(TeamsStats))]
+        public async Task<IActionResult> TeamsStats(int teamId)
+        {
+            if (cacher.TryGetValue("teamStats" + teamId, out string data))
+            {
+                return Ok(data);
+            }
+
+            var response = await this.apiOperation.GetTeamsStats(teamId);
+            cacher.Set("teamStats" + teamId, response);
+
+            return Ok(response);
+        }
+
+        [HttpGet(nameof(GamesPerSeason))]
+        public async Task<IActionResult> GamesPerSeason()
+        {
+            if (cacher.TryGetValue("gamesPerSeason", out string data))
+            {
+                return Ok(data);
+            }
+
+            var response = await this.apiOperation.GetGamesPerSeason();
+            cacher.Set("gamesPerSeason", response);
+
+            return Ok(response);
+        }
 
 
     }

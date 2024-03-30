@@ -32,16 +32,20 @@ const items = ref([
     {
     label: 'Statistiky',
     command: () => {
-    router.push('/stats');
+    router.push('/stats-players');
     },
     items: [
     {
-      label: 'Styled',
-      route: '/theming',
+      label: 'Statistiky - Hráči',
+      command: () => {
+    router.push('/stats-players');
+    },
     },
     {
-      label: 'Unstyled',
-      route: '/unstyled',
+      label: 'Statistiky - Týmy',
+      command: () => {
+    router.push('/stats-teams');
+    },
     },
   ],
  },
