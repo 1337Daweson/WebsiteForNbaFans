@@ -37,10 +37,10 @@
               :class="{'hidden': glossary}"
             >
               <div class="mb-2 flex flex-row items-center gap-1">
-                <h3 class="text-base font-semibold">  
+                <h3 class="text-xs font-semibold">  
                   {{ item.term }} -
                 </h3>
-                <p class="text-sm font-normal">
+                <p class="text-xs font-normal">
                   {{ item.definition }}
                 </p>
               </div>

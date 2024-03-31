@@ -33,7 +33,7 @@ export const useLeagueStore = defineStore('leagueStore', {
         },
     },
     getters: {
-        eastStandings: (state) => state.standings.filter(standing => standing.conference.name === 'east'),
-        westStandings: (state) => state.standings.filter(standing => standing.conference.name === 'west'),
+        eastStandings: (state) => state.standings.filter(standing => standing.conference.name === 'east').sort((a, b) => b.win.total - a.win.total),
+        westStandings: (state) => state.standings.filter(standing => standing.conference.name === 'west').sort((a, b) => b.win.total - a.win.total),
     },
 });

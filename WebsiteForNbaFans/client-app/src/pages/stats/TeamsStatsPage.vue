@@ -9,7 +9,7 @@
         :rows="30"
         paginator-template="FirstPageLink PrevPageLink NextPageLink LastPageLink CurrentPageReport"
         current-page-report-template="{first} do {last} z {totalRecords}"
-        sort-field="pointsPerGame"
+        sort-field="wins"
         :sort-order="-1"
         class="m-4 p-4"
         :rows-hover="true"
@@ -17,7 +17,7 @@
         <template #header>
           <div class="flex flex-row w-full h-full bg-white">
             <div class="self-start w-full">
-              <h2>Průměry Týmů na zápas za sezónu 2023/24</h2>
+              <h2>Průměry týmů na zápas za sezónu 2023/24</h2>
             </div>
             <div class="self-end w-full flex flex-row justify-end">
               <PrimeButton
@@ -27,18 +27,18 @@
               />              
             </div>
           </div>
-          <div class="grid grid-cols-4">
+          <div class="grid grid-cols-4 gap-2 grid-flow-row">
             <div
               v-for="(item, index) in glossaryItems"
               :key="index"
-              class="mb-2"
+              class="mr-2 w-full h-full"
               :class="{'hidden': glossary}"
             >
-              <div class="mb-2 flex flex-row items-center gap-1">
-                <h3 class="text-base font-semibold">  
+              <div class="flex flex-row items-center gap-1 w-full">
+                <h3 class="text-xs font-semibold">  
                   {{ item.term }} -
                 </h3>
-                <p class="text-sm font-normal">
+                <p class="text-xs font-normal">
                   {{ item.definition }}
                 </p>
               </div>
@@ -239,7 +239,9 @@ const getTeamIds = async () => {
 
 const glossaryItems = [
   { term: 'GP', definition: 'Games Played - Odehrané zápasy' },
-  { term: 'MIN', definition: 'Minutes Played - Odehrané minuty' },
+  { term: 'W', definition: 'Wins - Výhry' },
+  { term: 'L', definition: 'Losses - Prohry' },
+  { term: 'W%', definition: 'Wins percentage - Výhry (%)' },
   { term: 'PTS', definition: 'Points - Body' },
   { term: 'FGM', definition: 'Field Goals Made - úspěšný střelecký pokus z pole' },
   { term: 'FGA', definition: 'Field Goals Attempted - střelecký pokus z pole' },

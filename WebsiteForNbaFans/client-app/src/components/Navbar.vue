@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const items = ref([
     {
+      isChild: false,
       label: null,
       icon: 'custom-icon',
       command: () => {
@@ -12,36 +13,42 @@ const items = ref([
       },
     },
     {
+      isChild: false,
       label: 'O nás',
       command: () => {
         router.push('/about');
       },
     },
     {
+      isChild: false,
       label: 'Týmy',
       command: () => {
         router.push('/teams');
       },
     },
     {
+      isChild: false,
       label: 'Tabulky',
       command: () => {
         router.push('/standings');
       },
     },
     {
+    isChild: false,
     label: 'Statistiky',
-    command: () => {
-    router.push('/stats-players');
-    },
+    // command: () => {
+    // router.push('/stats-players');
+    // },
     items: [
     {
+      isChild: true,
       label: 'Statistiky - Hráči',
       command: () => {
     router.push('/stats-players');
     },
     },
     {
+      isChild: true,
       label: 'Statistiky - Týmy',
       command: () => {
     router.push('/stats-teams');
@@ -79,16 +86,15 @@ const items = ref([
         </router-link>
         <a
           v-else
-          v-ripple
+          v-ripple        
           :href="item.url"
           :target="item.target"
           v-bind="props.action"
         >
           <span :class="item.icon" />
-          <span class="customLink">{{ item.label }}</span>
+          <span :class="{'customLink' : item?.isChild === false, 'childCustomLink': item?.isChild }">{{ item.label }}</span>
           <span
             v-if="hasSubmenu"
-            class="pi pi-fw pi-angle-down ml-2"
           />
         </a>
       </template>
@@ -121,6 +127,12 @@ a:hover {
  transform-origin: right;
  transform: scaleX(0);
  transition: transform .3s ease-in-out;
+}
+
+.childCustomLink:hover {
+  background-color: lightgray;
+  width: 100%;
+  height: 100%;
 }
 
 .customLink:hover::before {
