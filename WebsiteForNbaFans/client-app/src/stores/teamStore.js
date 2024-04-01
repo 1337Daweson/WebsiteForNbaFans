@@ -10,7 +10,7 @@ export const useTeamStore = defineStore('teamStore', {
         currentPlayer: null,
         playersStats: [],
         teamsStats: [],
-        games: [],
+
     }),
 
     actions: {
@@ -89,21 +89,11 @@ export const useTeamStore = defineStore('teamStore', {
                 this.loaded = true;
             }
         },
-        async getGamesPerSeason() {
-            try {
-                this.loaded = false;
-                const response = await HttpRequestor.get('Nba/GamesPerSeason');
-                this.games = response.data.response;
-            } catch (error) {
-                console.error(error);
-            } finally {
-                this.loaded = true;
-            }
-        },
+        
     },
     getters: {
         NbaTeams: (state) => state.teams.filter(team => team.nbaFranchise === true && team.name !== 'Home Team Stephen A'),
         currentActiveRoster: (state) => state.roster.filter(player => player.nba.pro !== 0 && player.nba.start !== 0 ),
-        finishedGames: (state) => state.games.filter(game => game.status.long === 'Finished'),
+        
     },
 });

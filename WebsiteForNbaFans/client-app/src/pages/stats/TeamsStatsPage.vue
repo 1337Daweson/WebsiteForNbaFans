@@ -1,7 +1,7 @@
 <template>
   <div>
     <LoadingModal :loaded="loaded" />
-    <div class="bg-white mx-52 mt-10 mb-10 pb-2 ">
+    <div class="bg-white mx-48 mt-10 mb-10 pb-2 ">
       <DataTable
         ref="dtb"
         :value="teamStats"
@@ -221,12 +221,14 @@
 import { computed, onMounted, ref } from 'vue';
 import { useTeamStore } from '@/stores/teamStore';
 import { StatsCalculator } from '@/services/StatsHelper.js';
+import { useLeagueStore } from '../../stores/leagueStore';
 
 const store = useTeamStore();
+const leagueStore = useLeagueStore();
 const loaded = computed(() => store.loaded);
 const teams = computed(() => store.NbaTeams);
 const stats = computed(() => store.teamsStats);
-const games = computed(() => store.games);
+const games = computed(() => leagueStore.games);
 const transformedStats = computed(() => StatsCalculator.calculateTeamStats(stats.value, teams.value));
 const gamesWinsLosses = computed(() => StatsCalculator.getTeamWinsLosses(games.value));
 const teamStats = computed(() => StatsCalculator.transformTeamStats(mergeArrays(gamesWinsLosses.value, transformedStats.value)));
@@ -294,7 +296,7 @@ onMounted(async () => {
     await getTeamIds();        
   }
 
-  store.getGamesPerSeason();
+  leagueStore.getGamesPerSeason();
 });
 
 </script>

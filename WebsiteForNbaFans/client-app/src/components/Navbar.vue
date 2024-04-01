@@ -62,7 +62,7 @@ const items = ref([
 
 
 <template>
-  <div class="card bg-white">
+  <div class="card bg-white shadow-md">
     <MenuBar
       class="flex flex-row justify-center bg-white"
       :model="items"

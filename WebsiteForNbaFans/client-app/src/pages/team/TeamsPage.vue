@@ -39,7 +39,7 @@
 
 <script>
 import { computed, onMounted  } from 'vue';
-import { useTeamStore } from '../stores/teamStore';
+import { useTeamStore } from '@/stores/teamStore';
 export default {
   setup() {
     const store = useTeamStore();

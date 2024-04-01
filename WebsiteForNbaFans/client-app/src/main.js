@@ -14,8 +14,10 @@ import Paginator from 'primevue/paginator';
 import Carousel from 'primevue/carousel';
 import Card from 'primevue/card';
 import ProgressSpinner from 'primevue/progressspinner';
-import LoadingModal from '../src/composables/LoadingModal.vue';
+import LoadingModal from '../src/components/LoadingModal.vue';
 import 'primevue/resources/themes/lara-light-green/theme.css';
+import Dropdown from 'primevue/dropdown';
+import InputSwitch from 'primevue/inputswitch';
 
 const pinia = createPinia();
 
@@ -36,5 +38,7 @@ app.component('PrimePaginator', Paginator);
 app.component('PrimeCarousel', Carousel);
 app.component('PrimeCard', Card);
 app.component('ProgressSpinner', ProgressSpinner);
+app.component('DropDown', Dropdown);
+app.component('InputSwitch', InputSwitch);
 
 app.mount('#app');

@@ -47,6 +47,16 @@ td, th, span, a, p {
   color: #1a1a1a;
 }
 
+.ring-1 {
+  --tw-ring-shadow: none;
+}
+
+.p-dropdown-items-wrapper {
+  border: 0.8px solid  #1a1a1a;
+  border-radius: 0.25rem;
+  border-spacing: 0.25rem;
+}
+
 
 a {
   font-weight: 500;
@@ -78,7 +88,7 @@ body {
   background-color: #b6d6c4 !important;
 }
 
-button {
+/* button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -91,7 +101,7 @@ button {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 #app {
   color: #1a1a1a;

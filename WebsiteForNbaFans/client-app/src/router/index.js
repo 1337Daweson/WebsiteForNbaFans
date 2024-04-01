@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import AboutPage from '../pages/AboutPage.vue';
-import TeamsPage from '../pages/TeamsPage.vue';
-import TeamDetail from '../pages/TeamDetail.vue';
-import PlayerDetail from '../pages/PlayerDetail.vue';
-import StandingsPage from '../pages/StandingsPage.vue';
+import TeamsPage from '../pages/team/TeamsPage.vue';
+import TeamDetail from '../pages/team/TeamDetail.vue';
+import PlayerDetail from '../pages/player/PlayerDetail.vue';
+import StandingsPage from '../pages/standings/StandingsPage.vue';
 import PlayersStatsPage from '../pages/stats/PlayersStatsPage.vue';
 import TeamsStatsPage from '../pages/stats/TeamsStatsPage.vue';
 

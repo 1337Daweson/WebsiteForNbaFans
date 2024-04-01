@@ -1,5 +1,6 @@
 <template>
   <div>
+    <GameCalendar />
     <ArticlesComponent />
   </div>
 </template>
@@ -8,13 +9,18 @@
 import { onMounted } from 'vue';
 import { useTeamStore } from '../stores/teamStore';
 import ArticlesComponent from '../components/ArticlesComponent.vue';
+import { useLeagueStore } from '../stores/leagueStore';
+import GameCalendar from '../components/GameCalendar.vue';
 
-const store = useTeamStore();
+const teamStore = useTeamStore();
+const leagueStore = useLeagueStore();
 
 const getTeamIds = async () => {
-  store.NbaTeams.forEach(async team => {
-    await store.getPlayersStats(team.id);
+  teamStore.NbaTeams.forEach(async team => {
+    await teamStore.getPlayersStats(team.id);
   });
+
+  leagueStore.getGamesPerSeason();
 };
 
 onMounted(async () =>{

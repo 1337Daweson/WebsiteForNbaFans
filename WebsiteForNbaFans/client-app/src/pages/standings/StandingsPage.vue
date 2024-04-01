@@ -10,7 +10,7 @@
         size="small"
       >
         <template #header>
-          Východní konference
+          Východní konference BOSTON JE 58/16
         </template>
         <PrimeColumn
           field="team.name"
@@ -161,7 +161,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useLeagueStore } from '../stores/leagueStore';
+import { useLeagueStore } from '@/stores/leagueStore';
 
 const store = useLeagueStore();
 const loaded = computed(() => store.loaded);

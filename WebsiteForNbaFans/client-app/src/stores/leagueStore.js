@@ -20,10 +20,10 @@ export const useLeagueStore = defineStore('leagueStore', {
                 this.loaded = true;
             }
         },
-        async getGames(date) {
+        async getGamesPerSeason() {
             try {
                 this.loaded = false;
-                const response = await HttpRequestor.get('Nba/GamesByDate', { date });
+                const response = await HttpRequestor.get('Nba/GamesPerSeason');
                 this.games = response.data.response;
             } catch (error) {
                 console.error(error);
@@ -35,5 +35,6 @@ export const useLeagueStore = defineStore('leagueStore', {
     getters: {
         eastStandings: (state) => state.standings.filter(standing => standing.conference.name === 'east').sort((a, b) => b.win.total - a.win.total),
         westStandings: (state) => state.standings.filter(standing => standing.conference.name === 'west').sort((a, b) => b.win.total - a.win.total),
+        finishedGames: (state) => state.games.filter(game => game.status.long === 'Finished').sort((a,b) => new Date(b.date.start) - new Date(a.date.start)),
     },
 });

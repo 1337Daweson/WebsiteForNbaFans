@@ -104,9 +104,9 @@
 
 <script>
 import { computed, onMounted } from 'vue';
-import { useTeamStore } from '../stores/teamStore';
+import { useTeamStore } from '@/stores/teamStore';
 import { useRoute, useRouter } from 'vue-router';
-import { DateTransformer } from '../services/DateTransformer.js';
+import { DateTransformer } from '@/services/DateTransformer.js';
 export default {
     setup () {
         

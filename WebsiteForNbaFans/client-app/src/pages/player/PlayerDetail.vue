@@ -7,7 +7,7 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import { useTeamStore } from '../stores/teamStore';
+import { useTeamStore } from '@/stores/teamStore';
 import { useRoute } from 'vue-router';
 
 const store = useTeamStore();

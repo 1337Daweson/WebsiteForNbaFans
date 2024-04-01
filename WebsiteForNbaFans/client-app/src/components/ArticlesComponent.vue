@@ -4,139 +4,26 @@
       <PrimeCard class="m-2">
         <template #header>
           <img
-            alt="user header"
-            src="../assets//vite.svg"
+            alt="article header"
+            src="../assets/vite.svg"
           >
         </template>
         <template #title>
           Článek
         </template>
-        <template #subtitle>
-          Popis
-        </template>
         <template #content>
           <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
           </p>
         </template>
         <template #footer>
-          <div class="flex gap-3 mt-1">
+          <div class="flex justify-center mt-1">
             <PrimeButton
-              label="Cancel"
-              severity="secondary"
-              outlined
+              label="View Details"
               class="w-full"
+              @click="navigateToArticleDetail"
             />
-            <PrimeButton
-              label="Save"
-              class="w-full"
-            />
-          </div>
-        </template>
-      </PrimeCard>
-      <PrimeCard class="m-2">
-        <template #header>
-          <img
-            alt="user header"
-            src="../assets//vue.svg"
-          >
-        </template>
-        <template #title>
-          Článek
-        </template>
-        <template #subtitle>
-          popis
-        </template>
-        <template #content>
-          <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
-          </p>
-        </template>
-        <template #footer>
-          <div class="flex gap-3 mt-1">
-            <PrimeButton
-              label="Cancel"
-              severity="secondary"
-              outlined
-              class="w-full"
-            />
-            <PrimeButton
-              label="Save"
-              class="w-full"
-            />
-          </div>
-        </template>
-      </PrimeCard>
-    </div>
-    <div class="flex justify-center">
-      <PrimeCard class="m-2">
-        <template #header>
-          <img
-            alt="user header"
-            src="../assets//vite.svg"
-          >
-        </template>
-        <template #title>
-          Článek
-        </template>
-        <template #subtitle>
-          popis
-        </template>
-        <template #content>
-          <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
-          </p>
-        </template>
-        <template #footer>
-          <div class="flex gap-3 mt-1">
-            <PrimeButton
-              label="Cancel"
-              severity="secondary"
-              outlined
-              class="w-full"
-            />
-            <PrimeButton
-              label="Save"
-              class="w-full"
-            />
-          </div>
-        </template>
-      </PrimeCard>
-      <PrimeCard class="m-2">
-        <template #header>
-          <img
-            alt="user header"
-            src="../assets//vue.svg"
-          >
-        </template>
-        <template #title>
-          Článek
-        </template>
-        <template #subtitle>
-          popis
-        </template>
-        <template #content>
-          <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-            quas!
-          </p>
-        </template>
-        <template #footer>
-          <div class="flex gap-3 mt-1">
-            <PrimeButton
-              label="Cancel"
-              severity="secondary"
-              outlined
-              class="w-full"
-            />
-            <PrimeButton
-              label="Save"
-              class="w-full"
-            />
-          </div>
+          </div>  
         </template>
       </PrimeCard>
     </div>
