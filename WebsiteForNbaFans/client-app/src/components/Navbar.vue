@@ -4,58 +4,65 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const items = ref([
-    {
-      isChild: false,
-      label: null,
-      icon: 'custom-icon',
-      command: () => {
-        router.push('/');
-      },
+  {
+    isChild: false,
+    label: null,
+    icon: 'custom-icon',
+    command: () => {
+      router.push('/');
     },
-    {
-      isChild: false,
-      label: 'O nás',
-      command: () => {
-        router.push('/about');
-      },
+  },
+  {
+    isChild: false,
+    label: 'O nás',
+    command: () => {
+      router.push('/about');
     },
-    {
-      isChild: false,
-      label: 'Týmy',
-      command: () => {
-        router.push('/teams');
-      },
+  },
+  {
+    isChild: false,
+    label: 'Týmy',
+    command: () => {
+      router.push('/teams');
     },
-    {
-      isChild: false,
-      label: 'Tabulky',
-      command: () => {
-        router.push('/standings');
-      },
+  },
+  {
+    isChild: false,
+    label: 'Tabulky',
+    command: () => {
+      router.push('/standings');
     },
-    {
+  },
+  {
     isChild: false,
     label: 'Statistiky',
     // command: () => {
     // router.push('/stats-players');
     // },
     items: [
-    {
-      isChild: true,
-      label: 'Statistiky - Hráči',
-      command: () => {
-    router.push('/stats-players');
+      {
+        isChild: true,
+        label: 'Statistiky - Hráči',
+        command: () => {
+          router.push('/stats-players');
+        },
+      },
+      {
+        isChild: true,
+        label: 'Statistiky - Týmy',
+        command: () => {
+          router.push('/stats-teams');
+        },
+      },
+    ],
+  },
+  {
+    isChild: false,
+    label: 'Články',
+    command: () => {
+      router.push('/articles');
     },
-    },
-    {
-      isChild: true,
-      label: 'Statistiky - Týmy',
-      command: () => {
-    router.push('/stats-teams');
-    },
-    },
-  ],
- },
+  },
 ]);
 
 </script>

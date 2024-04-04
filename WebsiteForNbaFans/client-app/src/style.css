@@ -57,6 +57,10 @@ td, th, span, a, p {
   border-spacing: 0.25rem;
 }
 
+/* 
+.p-carousel[pv_id_3] .p-carousel-item {
+  flex: 1 !important;
+} */
 
 a {
   font-weight: 500;

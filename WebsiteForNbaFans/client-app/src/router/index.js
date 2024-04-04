@@ -7,6 +7,7 @@ import PlayerDetail from '../pages/player/PlayerDetail.vue';
 import StandingsPage from '../pages/standings/StandingsPage.vue';
 import PlayersStatsPage from '../pages/stats/PlayersStatsPage.vue';
 import TeamsStatsPage from '../pages/stats/TeamsStatsPage.vue';
+import ArticlePage from '../pages/article/ArticlePage.vue';
 
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
         path: '/stats-teams',
         name: 'Statistika - týmy',
         component: TeamsStatsPage,
+    },
+    {
+        path: '/articles',
+        name: 'články',
+        component: ArticlePage,
     },
 ];
 

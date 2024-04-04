@@ -16,3 +16,7 @@ const player = computed(() => store.currentPlayer);
 
 onMounted(() => store.getPlayer(route.params.playerId));
 </script>
+
+<style>
+
+</style>

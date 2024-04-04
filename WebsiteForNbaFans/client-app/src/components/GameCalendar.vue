@@ -7,6 +7,7 @@
         option-label="label"
         placeholder="Select a Date"
         class="w-full"
+        @change="toFirstPage()"
       />
       <div class="flex flex-row w-full items-center gap-2">
         <span class="text-xs">Schovat skóre</span>
@@ -15,30 +16,18 @@
     </div>
     <div class="bg-white w-full h-1/2 m-auto shadow-md">
       <PrimeCarousel
+        :key="carouselKey"
+        :page="currentPage"
         :value="todayGames"
-        :num-visible="10"
-        :num-scroll="3"
+        :num-visible="5"
+        :num-scroll="4"
         :show-indicators="false"
+        class="w-3/6"
       >
         <template #item="slotProps">
           <div class=" w-full border-2 border-spacing-28 surface-border rounded m-2 p-3 bg-slate-100">
             <div class="mb-3">
               <div class="relative mx-auto">
-                <!-- Display home team logo -->
-                <div class="flex flex-row items-center w-full h-full">
-                  <div class="flex flex-row items-center w-full">
-                    <img
-                      :src="slotProps.data.teams.home.logo"
-                      :alt="slotProps.data.teams.home.code"
-                      class="border-round object-contain h-5 w-4 mr-2"
-                    >
-                    <span class="text-xs font-semibold">{{ slotProps.data.teams.home.code }}</span>
-                  </div>
-                  <div class="flex flex-row items-center w-full justify-end">
-                    <span class="text-xs font-semibold">{{ hideScores === false ? slotProps.data.scores.home.points : '-' }}</span>
-                    <span :class="{'redTriangle': slotProps.data.scores.home.points > slotProps.data.scores.visitors.points && hideScores === false }" />
-                  </div>
-                </div>
                 <div class="flex flex-row items-center w-full h-full">
                   <!-- Display away team logo -->
                   <div class="flex flex-row items-center w-full">
@@ -54,6 +43,21 @@
                     <span :class="{'redTriangle': slotProps.data.scores.home.points < slotProps.data.scores.visitors.points && hideScores === false }" />
                   </div>
                 </div>
+                <!-- Display home team logo -->
+                <div class="flex flex-row items-center w-full h-full">
+                  <div class="flex flex-row items-center w-full">
+                    <img
+                      :src="slotProps.data.teams.home.logo"
+                      :alt="slotProps.data.teams.home.code"
+                      class="border-round object-contain h-5 w-4 mr-2"
+                    >
+                    <span class="text-xs font-semibold">{{ slotProps.data.teams.home.code }}</span>
+                  </div>
+                  <div class="flex flex-row items-center w-full justify-end">
+                    <span class="text-xs font-semibold">{{ hideScores === false ? slotProps.data.scores.home.points : '-' }}</span>
+                    <span :class="{'redTriangle': slotProps.data.scores.home.points > slotProps.data.scores.visitors.points && hideScores === false }" />
+                  </div>
+                </div>                
               </div>
             </div>
           </div>
@@ -71,6 +75,8 @@ const leagueStore = useLeagueStore();
 const selectedDate = ref();
 const dateOptions = [];
 const hideScores = ref(false);
+const currentPage = ref(0);
+const carouselKey = ref(0);
 
 const games = computed(() => leagueStore.finishedGames);
 const todayGames = computed(() => games.value.filter(game => {
@@ -78,9 +84,14 @@ const todayGames = computed(() => games.value.filter(game => {
   gameDate.setHours(0, 0, 0, 0);
 
   if (selectedDate.value) {
-    return gameDate.getTime() === selectedDate.value.value.getTime();    
+    return gameDate.getTime() === selectedDate.value.value.getTime() && (game.status.long === 'Finished' || game.status.long === 'Scheduled');
   }
 }));
+
+const toFirstPage = () => {
+  currentPage.value = 0;
+ carouselKey.value++;
+};
 
 
 
@@ -89,7 +100,7 @@ onMounted(() => {
   today.setHours(0, 0, 0, 0);
   for (let i = 0; i <= 3; i++) {
     const date = new Date(today);
-    date.setDate(today.getDate() - i);
+    date.setDate(today.getDate() - i + 1);
     dateOptions.push({ label: date.toLocaleDateString(), value: date });
     selectedDate.value = dateOptions[0];
   }

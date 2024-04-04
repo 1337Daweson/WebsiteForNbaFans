@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full min-h-full">
     <GameCalendar />
     <ArticlesComponent />
   </div>

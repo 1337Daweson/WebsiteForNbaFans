@@ -35,6 +35,7 @@ export const useLeagueStore = defineStore('leagueStore', {
     getters: {
         eastStandings: (state) => state.standings.filter(standing => standing.conference.name === 'east').sort((a, b) => b.win.total - a.win.total),
         westStandings: (state) => state.standings.filter(standing => standing.conference.name === 'west').sort((a, b) => b.win.total - a.win.total),
-        finishedGames: (state) => state.games.filter(game => game.status.long === 'Finished').sort((a,b) => new Date(b.date.start) - new Date(a.date.start)),
+        finishedGames: (state) => state.games
+        .sort((a,b) => new Date(b.date.start) - new Date(a.date.start)),
     },
 });
