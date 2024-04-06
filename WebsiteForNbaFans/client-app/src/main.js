@@ -18,6 +18,7 @@ import LoadingModal from '../src/components/LoadingModal.vue';
 import 'primevue/resources/themes/lara-light-green/theme.css';
 import Dropdown from 'primevue/dropdown';
 import InputSwitch from 'primevue/inputswitch';
+import TextClamp from 'vue3-text-clamp';
 
 const pinia = createPinia();
 
@@ -29,6 +30,7 @@ app.use(PrimeVue, {
 app.use(pinia);
 
 app.component('LoadingModal', LoadingModal);
+app.component('TextClamp', TextClamp);
 app.component('DataTable', DataTable);
 app.component('MenuBar', Menubar);
 app.component('PrimeColumn', Column);

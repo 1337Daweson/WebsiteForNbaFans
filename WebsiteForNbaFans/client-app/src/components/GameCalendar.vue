@@ -20,7 +20,7 @@
         :page="currentPage"
         :value="todayGames"
         :num-visible="5"
-        :num-scroll="4"
+        :num-scroll="4" 
         :show-indicators="false"
         class="w-3/6"
       >
@@ -86,6 +86,16 @@ const todayGames = computed(() => games.value.filter(game => {
   if (selectedDate.value) {
     return gameDate.getTime() === selectedDate.value.value.getTime() && (game.status.long === 'Finished' || game.status.long === 'Scheduled');
   }
+}).sort((a, b) => {
+  if (a.status.long === 'Finished' && b.status.long !== 'Finished') {
+    return -1;
+  }
+  if (a.status.long !== 'Finished' && b.status.long === 'Finished') {
+    return 1;
+  }
+  const dateA = new Date(a.date.start).getTime();
+  const dateB = new Date(b.date.start).getTime();
+  return dateA - dateB; // Earliest first
 }));
 
 const toFirstPage = () => {
@@ -100,9 +110,9 @@ onMounted(() => {
   today.setHours(0, 0, 0, 0);
   for (let i = 0; i <= 3; i++) {
     const date = new Date(today);
-    date.setDate(today.getDate() - i + 1);
+    date.setDate(today.getDate() - i + 2);
     dateOptions.push({ label: date.toLocaleDateString(), value: date });
-    selectedDate.value = dateOptions[0];
+    selectedDate.value = dateOptions[2];
   }
 });
 
