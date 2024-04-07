@@ -183,6 +183,7 @@ class StatsCalculator {
     const groupedByTeam = gameStatsArray.reduce((acc, gameStat) => {
       const teamId = gameStat.teamId;
       if (!acc[teamId]) {
+        
         acc[teamId] = {
           name: gameStat.teamName,
           games: gameStat.totalGames,
@@ -305,10 +306,6 @@ class StatsCalculator {
 
     return teamStats.sort((a, b) => b.pointsPerGame - a.pointsPerGame);
  }
-
-
-
-
 }
 
 export { StatsCalculator };

@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { allArticles } from '@/services/ArticlesProvider.js';
+import { allArticles } from '@/services/ObjectsProvider.js';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 const articles = computed(() => allArticles.filter(article => article.homepage === true)); 

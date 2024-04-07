@@ -209,6 +209,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useTeamStore } from '@/stores/teamStore';
 import { StatsCalculator } from '@/services/StatsHelper.js';
+import { playersStatsGlossary } from '../../services/ObjectsProvider';
 
 // continue with stats
 // https://www.phind.com/search?cache=c7pk8u3evr4v8wxnppgc5ct6
@@ -218,29 +219,7 @@ const teams = computed(() => store.NbaTeams);
 const loaded = computed(() => store.loaded);
 const transformedStats = computed(() => StatsCalculator.calculatePlayerStats(stats.value));
 
-const glossaryItems = [
-  { term: 'GP', definition: 'Games Played - Odehrané zápasy' },
-  { term: 'MIN', definition: 'Minutes Played - Odehrané minuty' },
-  { term: 'PTS', definition: 'Points - Body' },
-  { term: 'FGM', definition: 'Field Goals Made - úspěšný střelecký pokus z pole' },
-  { term: 'FGA', definition: 'Field Goals Attempted - střelecký pokus z pole' },
-  { term: 'FG%', definition: 'Field Goal Percentage - úspěšnost střelby z pole (%)' },
-  { term: '3PM', definition: '3 Point Field Goals Made - úspěšný střelecký pokus za 3 body' },
-  { term: '3PA', definition: '3 Point Field Goals Attempted - střelecký pokus za 3 body' },
-  { term: '3P%', definition: '3 Point Field Goal Percentage - úspěšnost střelby za 3 body (%)' },
-  { term: 'FTM', definition: 'Free Throws Made - úspěšný střelecký pokus (trestný hod)' },
-  { term: 'FTA', definition: 'Free Throws Attempted - střelecký pokus (trestný hod)' },
-  { term: 'FT%', definition: 'Free Throw Percentage -  úspěšnost trestných hodů (%)' },
-  { term: 'OREB', definition: 'Offensive Rebounds - útočné doskoky' },
-  { term: 'DREB', definition: 'Defensive Rebounds - obranné doskoky' },
-  { term: 'REB', definition: 'Rebounds - doskoky' },
-  { term: 'AST', definition: 'Assists - asistence' },
-  { term: 'TOV', definition: 'Turnovers - ztráty míče' },
-  { term: 'STL', definition: 'Steals - zisk míče' },
-  { term: 'BLK', definition: 'Blocks - bloky' },
-  { term: 'PF', definition: 'Personal Fouls - osobní chyby' },
-  { term: '+/-', definition: 'Plus-Minus - statistika účasti na palubovce při vstřelených(+) a obdržených(-) bodech' },
-];
+const glossaryItems = playersStatsGlossary;
 
 const glossary = ref(true);  
 

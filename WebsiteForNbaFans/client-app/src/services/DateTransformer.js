@@ -32,6 +32,17 @@ class DateTransformer {
         const currentYear = new Date().getFullYear();
         return currentYear - startYear;
     }
+
+    static toCzBirthdate(birthdate) {
+        const date = new Date(birthdate);
+        const formattedDate = new Intl.DateTimeFormat('cz-CS', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        }).format(date);
+
+        return formattedDate;
+    }
 }
 
 export { DateTransformer }; 

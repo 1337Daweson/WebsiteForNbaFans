@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { allArticles } from '@/services/ArticlesProvider.js';
+import { allArticles } from '@/services/ObjectsProvider.js';
 
 const articles = allArticles;
 </script>

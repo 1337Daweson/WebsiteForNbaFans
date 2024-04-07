@@ -1,7 +1,10 @@
 <template>
   <div>
     <LoadingModal :loaded="loaded" />
-    <div class="bg-white mx-48 mt-10 mb-10 pb-2 ">
+    <div
+      v-if="teamStats"
+      class="bg-white mx-48 mt-10 mb-10 pb-2 "
+    >
       <DataTable
         ref="dtb"
         :value="teamStats"
@@ -218,20 +221,23 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, onBeforeMount } from 'vue';
 import { useTeamStore } from '@/stores/teamStore';
 import { StatsCalculator } from '@/services/StatsHelper.js';
 import { useLeagueStore } from '../../stores/leagueStore';
+import { teamsStatsGlossary } from '../../services/ObjectsProvider';
 
 const store = useTeamStore();
 const leagueStore = useLeagueStore();
 const loaded = computed(() => store.loaded);
+
 const teams = computed(() => store.NbaTeams);
 const stats = computed(() => store.teamsStats);
 const games = computed(() => leagueStore.games);
-const transformedStats = computed(() => StatsCalculator.calculateTeamStats(stats.value, teams.value));
-const gamesWinsLosses = computed(() => StatsCalculator.getTeamWinsLosses(games.value));
-const teamStats = computed(() => StatsCalculator.transformTeamStats(mergeArrays(gamesWinsLosses.value, transformedStats.value)));
+
+const calculatedTeamStats = computed(() => StatsCalculator.calculateTeamStats(stats.value, teams.value));
+const teamWinsAndLosses = computed(() => StatsCalculator.getTeamWinsLosses(games.value));
+const teamStats = computed(() => StatsCalculator.transformTeamStats(mergeArrays(teamWinsAndLosses.value, calculatedTeamStats.value)));
 
 const getTeamIds = async () => {
   teams.value.forEach(async team => {
@@ -239,35 +245,10 @@ const getTeamIds = async () => {
   });
 };
 
-const glossaryItems = [
-  { term: 'GP', definition: 'Games Played - Odehrané zápasy' },
-  { term: 'W', definition: 'Wins - Výhry' },
-  { term: 'L', definition: 'Losses - Prohry' },
-  { term: 'W%', definition: 'Wins percentage - Výhry (%)' },
-  { term: 'PTS', definition: 'Points - Body' },
-  { term: 'FGM', definition: 'Field Goals Made - úspěšný střelecký pokus z pole' },
-  { term: 'FGA', definition: 'Field Goals Attempted - střelecký pokus z pole' },
-  { term: 'FG%', definition: 'Field Goal Percentage - úspěšnost střelby z pole (%)' },
-  { term: '3PM', definition: '3 Point Field Goals Made - úspěšný střelecký pokus za 3 body' },
-  { term: '3PA', definition: '3 Point Field Goals Attempted - střelecký pokus za 3 body' },
-  { term: '3P%', definition: '3 Point Field Goal Percentage - úspěšnost střelby za 3 body (%)' },
-  { term: 'FTM', definition: 'Free Throws Made - úspěšný střelecký pokus (trestný hod)' },
-  { term: 'FTA', definition: 'Free Throws Attempted - střelecký pokus (trestný hod)' },
-  { term: 'FT%', definition: 'Free Throw Percentage -  úspěšnost trestných hodů (%)' },
-  { term: 'OREB', definition: 'Offensive Rebounds - útočné doskoky' },
-  { term: 'DREB', definition: 'Defensive Rebounds - obranné doskoky' },
-  { term: 'REB', definition: 'Rebounds - doskoky' },
-  { term: 'AST', definition: 'Assists - asistence' },
-  { term: 'TOV', definition: 'Turnovers - ztráty míče' },
-  { term: 'STL', definition: 'Steals - zisk míče' },
-  { term: 'BLK', definition: 'Blocks - bloky' },
-  { term: 'PF', definition: 'Personal Fouls - osobní chyby' },
-  { term: '+/-', definition: 'Plus-Minus - statistika účasti na palubovce při vstřelených(+) a obdržených(-) bodech' },
-];
 
+
+const glossaryItems = teamsStatsGlossary;
 const glossary = ref(true);  
-
-
 
 const mergeArrays = (array1, array2) => {
  // Use reduce to create a map of the first array's objects by teamId

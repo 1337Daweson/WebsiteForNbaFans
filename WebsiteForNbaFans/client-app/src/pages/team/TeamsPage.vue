@@ -88,7 +88,7 @@ export default {
     };
 
 
-    onMounted(() => store.getTeams());
+    onMounted(async () => await store.getTeams());
 
     return {
       teams,

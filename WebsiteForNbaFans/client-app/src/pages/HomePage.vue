@@ -16,6 +16,7 @@ const teamStore = useTeamStore();
 const leagueStore = useLeagueStore();
 
 const getTeamIds = async () => {
+  teamStore.getTeams();
   teamStore.NbaTeams.forEach(async team => {
     await teamStore.getPlayersStats(team.id);
   });

@@ -128,15 +128,15 @@ namespace WebsiteForNbaFans.Controllers
             return Ok(response);
         }
 
-        [HttpGet(nameof(PlayersStats))]
-        public async Task<IActionResult> PlayersStats(int teamId)
+        [HttpGet(nameof(PlayersStatsByTeam))]
+        public async Task<IActionResult> PlayersStatsByTeam(int teamId)
         {
             if (cacher.TryGetValue("stats" + teamId, out string data))
             {
                 return Ok(data);
             }
 
-            var response = await this.apiOperation.GetPlayersStats(teamId);
+            var response = await this.apiOperation.GetPlayersStatsByTeam(teamId);
             cacher.Set("stats" + teamId, response);
 
             return Ok(response);
@@ -166,6 +166,20 @@ namespace WebsiteForNbaFans.Controllers
 
             var response = await this.apiOperation.GetGamesPerSeason();
             cacher.Set("gamesPerSeason", response);
+
+            return Ok(response);
+        }
+
+        [HttpGet(nameof(PlayerStats))]
+        public async Task<IActionResult> PlayerStats(int playerId)
+        {
+            if (cacher.TryGetValue("playerStats" + playerId, out string data))
+            {
+                return Ok(data);
+            }
+
+            var response = await this.apiOperation.GetPlayerStats(playerId);
+            cacher.Set("playerStats" + playerId, response);
 
             return Ok(response);
         }

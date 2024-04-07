@@ -10,7 +10,7 @@ export const useTeamStore = defineStore('teamStore', {
         currentPlayer: null,
         playersStats: [],
         teamsStats: [],
-
+        playerStats: [],
     }),
 
     actions: {
@@ -63,7 +63,7 @@ export const useTeamStore = defineStore('teamStore', {
         async getPlayersStats(id) {
             try {
                 this.loaded = false;
-                const response = await HttpRequestor.get('Nba/PlayersStats', { teamId: id });
+                const response = await HttpRequestor.get('Nba/PlayersStatsByTeam', { teamId: id });
                 this.playersStats = [...this.playersStats, ...response.data.response];
             } catch (error) {
                 console.error(error);
@@ -83,6 +83,17 @@ export const useTeamStore = defineStore('teamStore', {
                 });
                 // Merge the new teams stats with the existing ones using the spread operator
                 this.teamsStats = [...this.teamsStats, ...newTeamsStats];
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+        async getPlayerStats(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/PlayerStats', { playerId: id });
+                this.playerStats = response.data.response;
             } catch (error) {
                 console.error(error);
             } finally {

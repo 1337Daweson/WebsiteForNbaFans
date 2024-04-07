@@ -19,5 +19,6 @@ module.exports = {
       }],
       'comma-dangle': ['warn', 'always-multiline'],
       'vue/no-template-shadow': 'off',
+      'no-unused-vars': 'warn',
     },
   };

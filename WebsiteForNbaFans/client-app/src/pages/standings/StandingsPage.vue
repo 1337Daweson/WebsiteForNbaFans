@@ -217,7 +217,6 @@ const eastStandings = computed(() => store.eastStandings);
 const westStandings = computed(() => store.westStandings);
 
 const setRowClass = (data) => {
-  console.log(data.conference.rank);
   if (data.conference.rank <= 6) {
     return 'bg-opacity-10 bg-green-500';
   } else if (data.conference.rank > 6 && data.conference.rank <= 10) {
