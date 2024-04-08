@@ -107,6 +107,7 @@ const toFirstPage = () => {
 
 onMounted(() => {
   const today = new Date();
+  leagueStore.getGamesPerSeason();
   today.setHours(0, 0, 0, 0);
   for (let i = 0; i <= 3; i++) {
     const date = new Date(today);
