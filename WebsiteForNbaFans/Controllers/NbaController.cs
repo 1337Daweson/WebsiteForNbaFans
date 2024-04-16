@@ -171,15 +171,15 @@ namespace WebsiteForNbaFans.Controllers
         }
 
         [HttpGet(nameof(PlayerStats))]
-        public async Task<IActionResult> PlayerStats(int playerId)
+        public async Task<IActionResult> PlayerStats(int playerId, int season)
         {
-            if (cacher.TryGetValue("playerStats" + playerId, out string data))
+            if (cacher.TryGetValue("playerStats" + playerId + season, out string data))
             {
                 return Ok(data);
             }
 
-            var response = await this.apiOperation.GetPlayerStats(playerId);
-            cacher.Set("playerStats" + playerId, response);
+            var response = await this.apiOperation.GetPlayerStats(playerId, season);
+            cacher.Set("playerStats" + playerId + season, response);
 
             return Ok(response);
         }

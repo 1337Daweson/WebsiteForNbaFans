@@ -1,4 +1,5 @@
 <template>
+  <LoadingModal :loaded="loaded" />
   <div class="h-full min-h-full">
     <GameCalendar />
     <ArticlesComponent />
@@ -6,7 +7,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useTeamStore } from '../stores/teamStore';
 import ArticlesComponent from '../components/ArticlesComponent.vue';
 import { useLeagueStore } from '../stores/leagueStore';
@@ -14,6 +15,7 @@ import GameCalendar from '../components/GameCalendar.vue';
 
 const teamStore = useTeamStore();
 const leagueStore = useLeagueStore();
+const loaded = computed(() => teamStore.loaded);
 
 const getTeamIds = async () => {
   teamStore.getTeams();
@@ -25,7 +27,7 @@ const getTeamIds = async () => {
 };
 
 onMounted(async () =>{
-  // await store.getTeams();
+  // await teamStore.getTeams();
   await getTeamIds();
 });
 </script>

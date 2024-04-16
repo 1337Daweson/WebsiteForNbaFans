@@ -1,10 +1,7 @@
 <template>
   <div>
+    <LoadingModal :loaded="loaded" />
     <div class="bg-white w-1/2 m-auto p-auto mt-10 mb-10">
-      <ProgressSpinner
-        v-if="!loaded"
-        class="flex justify-center"
-      />
       <DataTable
         :value="eastStandings"
         size="small"

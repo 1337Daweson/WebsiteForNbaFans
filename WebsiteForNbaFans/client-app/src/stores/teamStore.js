@@ -11,6 +11,7 @@ export const useTeamStore = defineStore('teamStore', {
         playersStats: [],
         teamsStats: [],
         playerStats: [],
+        players: [],
     }),
 
     actions: {
@@ -49,10 +50,12 @@ export const useTeamStore = defineStore('teamStore', {
             
         },
         async getPlayer(id) {
+            // console.log('getPlayer');
             try {
                 this.loaded = false;
                 const response = await HttpRequestor.get('Nba/Player', { playerId: id });
-                this.currentPlayer = response.data.response;
+                this.currentPlayer = response.data.response[0];
+                // console.log(this.currentPlayer);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -89,16 +92,38 @@ export const useTeamStore = defineStore('teamStore', {
                 this.loaded = true;
             }
         },
-        async getPlayerStats(id) {
+        async getPlayerStats(id, year) {
             try {
                 this.loaded = false;
-                const response = await HttpRequestor.get('Nba/PlayerStats', { playerId: id });
-                this.playerStats = response.data.response;
+                const response = await HttpRequestor.get('Nba/PlayerStats', { playerId: id, season: year });
+
+        
+                // Create an object with the year and response data
+                // console.log(year);
+                // console.log(response.data.response);
+                const responseObject = { season: year, games: response.data.response };
+        
+                // Push the object into the allResponses array
+                this.playerStats.push(responseObject);
+        
             } catch (error) {
                 console.error(error);
             } finally {
                 this.loaded = true;
             }
+        },
+
+        async getAllPlayers(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/Roster', { teamId: id });
+                this.players.push({teamId: id, players: response.data.response});
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+            
         },
         
     },

@@ -221,7 +221,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, onBeforeMount } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useTeamStore } from '@/stores/teamStore';
 import { StatsCalculator } from '@/services/StatsHelper.js';
 import { useLeagueStore } from '../../stores/leagueStore';

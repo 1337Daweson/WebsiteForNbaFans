@@ -1,5 +1,6 @@
 class StatsCalculator {
   static calculatePlayerStats(gameStatsArray) {
+    // console.log(gameStatsArray);
     // Step 1: Group statistics by player
     const groupedByPlayer = gameStatsArray.reduce((acc, gameStat) => {
       const playerId = gameStat.player.id;
@@ -115,7 +116,7 @@ class StatsCalculator {
         plusMinusPerGame,
       });
     }
-
+    // console.log(playerStats);
     return playerStats.sort((a, b) => b.pointsPerGame - a.pointsPerGame);
   }
 
@@ -183,7 +184,7 @@ class StatsCalculator {
     const groupedByTeam = gameStatsArray.reduce((acc, gameStat) => {
       const teamId = gameStat.teamId;
       if (!acc[teamId]) {
-        
+
         acc[teamId] = {
           name: gameStat.teamName,
           games: gameStat.totalGames,
@@ -241,11 +242,11 @@ class StatsCalculator {
     const teamStats = [];
     for (const teamId in groupedByTeam) {
       const { name, games, wins, losses, totalPoints,
-        totalShotsMade, totalShotsAttempted, 
-        totalTreesMade, totalTreesAttempted, 
-        totalFreeThrowsMade, totalFreeThrowsAttempted, 
+        totalShotsMade, totalShotsAttempted,
+        totalTreesMade, totalTreesAttempted,
+        totalFreeThrowsMade, totalFreeThrowsAttempted,
         totalOffReb, totalDefReb, totalReb,
-        totalAssists, totalTurnovers, totalSteals, totalBlocks, 
+        totalAssists, totalTurnovers, totalSteals, totalBlocks,
         totalPersonalFouls, totalPlusMinus, statsGames,
       } = groupedByTeam[teamId];
 
@@ -253,7 +254,7 @@ class StatsCalculator {
 
       const fieldGoalsMade = parseFloat((totalShotsMade / numberOfGames).toFixed(1));
       const fieldGoalsAttempted = parseFloat((totalShotsAttempted / numberOfGames).toFixed(1));
-      const fieldGoalPercentage = parseFloat((totalShotsMade / totalShotsAttempted * 100).toFixed(1)); 
+      const fieldGoalPercentage = parseFloat((totalShotsMade / totalShotsAttempted * 100).toFixed(1));
 
       const treePointersMade = parseFloat((totalTreesMade / numberOfGames).toFixed(1));
       const treePointersAttempted = parseFloat((totalTreesAttempted / numberOfGames).toFixed(1));
@@ -281,7 +282,7 @@ class StatsCalculator {
         name,
         wins,
         losses,
-        games,  
+        games,
         pointsPerGame: parseFloat((totalPoints / numberOfGames).toFixed(1)),
         fieldGoalsMade,
         fieldGoalsAttempted,
@@ -305,7 +306,183 @@ class StatsCalculator {
     }
 
     return teamStats.sort((a, b) => b.pointsPerGame - a.pointsPerGame);
- }
-}
+  }
 
+  static calculatePlayerStatsPerSeason(playerStatsArray) {
+    // Step 1: Group statistics by season
+    const groupedBySeason = playerStatsArray.reduce((acc, playerStat) => {
+      console.log(playerStat);
+      const season = playerStat.season;
+      let player = null;
+      let team = null;
+      if (playerStat.games && playerStat.games.length > 0) {        
+        player = playerStat.games[0].player.firstname + ' ' + playerStat.games[0].player.lastname;
+        team = playerStat.games[0].team.code;
+    } else {
+        console.log('Games array is empty or not available');
+    }
+      //  console.log(player);
+
+      if (!acc[season]) {
+        acc[season] = {
+          season,
+          team,
+          player,
+          totalPoints: 0,
+          totalMinutes: 0,
+          totalShotsMade: 0,
+          totalShotsAttempted: 0,
+          totalTreesMade: 0,
+          totalTreesAttempted: 0,
+          totalFreeThrowsMade: 0,
+          totalFreeThrowsAttempted: 0,
+          totalOffReb: 0,
+          totalDefReb: 0,
+          totalReb: 0,
+          totalAssists: 0,
+          totalTurnovers: 0,
+          totalSteals: 0,
+          totalBlocks: 0,
+          totalPersonalFouls: 0,
+          totalPlusMinus: 0,
+          numberOfGames: 0,
+        };
+      }
+
+      function extractMinutes(timeString) {
+        // Split the string at the colon and take the first part (minutes)
+        const minutes = timeString.split(':')[0];
+        return parseInt(minutes, 10);
+      }
+
+      // Accumulate statistics for each game in the season
+      playerStat.games.forEach(game => {
+        acc[season].totalPoints += game.points;
+        if (game.min !== null) {
+          acc[season].totalMinutes += game.min.includes(':') ? extractMinutes(game.min) : Number.parseFloat(game.min);
+        } else {
+          acc[season].totalMinutes += 0;
+        }
+        acc[season].totalShotsMade += game.fgm;
+        acc[season].totalShotsAttempted += game.fga;
+        acc[season].totalTreesMade += game.tpm;
+        acc[season].totalTreesAttempted += game.tpa;
+        acc[season].totalFreeThrowsMade += game.ftm;
+        acc[season].totalFreeThrowsAttempted += game.fta;
+        acc[season].totalOffReb += game.offReb;
+        acc[season].totalDefReb += game.defReb;
+        acc[season].totalReb += game.totReb;
+        acc[season].totalAssists += game.assists;
+        acc[season].totalTurnovers += game.turnovers;
+        acc[season].totalSteals += game.steals;
+        acc[season].totalBlocks += game.blocks;
+        acc[season].totalPersonalFouls += game.pFouls;
+        if (game.plusMinus !== null) {
+          acc[season].totalPlusMinus += Number.parseFloat(game.plusMinus);
+        }
+        acc[season].numberOfGames += 1; // Increment the number of games for this season
+      });
+
+      return acc;
+    }, {});
+
+    // console.log(groupedBySeason);
+
+    // Step 2: Calculate averages for each season
+    const seasonAverages = [];
+    for (const season in groupedBySeason) {
+      const { season: seasonName, totalPoints, totalMinutes, totalShotsMade, totalShotsAttempted,
+        totalTreesMade, totalTreesAttempted, totalFreeThrowsMade, totalFreeThrowsAttempted,
+        totalOffReb, totalDefReb, totalReb, totalAssists, totalTurnovers, totalSteals, totalBlocks,
+        totalPersonalFouls, totalPlusMinus, numberOfGames, player, team,
+      } = groupedBySeason[season];
+
+      const averageMinutesPerGame = parseFloat((totalMinutes / numberOfGames).toFixed(1));
+      const pointsPerGame = parseFloat((totalPoints / numberOfGames).toFixed(1));
+      const fieldGoalsMade = parseFloat((totalShotsMade / numberOfGames).toFixed(1));
+      const fieldGoalsAttempted = parseFloat((totalShotsAttempted / numberOfGames).toFixed(1));
+      const fieldGoalPercentage = parseFloat((totalShotsMade / totalShotsAttempted * 100).toFixed(1));
+
+      const treePointersMade = parseFloat((totalTreesMade / numberOfGames).toFixed(1));
+      const treePointersAttempted = parseFloat((totalTreesAttempted / numberOfGames).toFixed(1));
+      const treePointersPercentage = parseFloat((totalTreesMade / totalTreesAttempted * 100).toFixed(1));
+
+      const freeThrowsMade = parseFloat((totalFreeThrowsMade / numberOfGames).toFixed(1));
+      const freeThrowsAttempted = parseFloat((totalFreeThrowsAttempted / numberOfGames).toFixed(1));
+      const freeThrowsPercentage = parseFloat((totalFreeThrowsMade / totalFreeThrowsAttempted * 100).toFixed(1));
+
+      const offRebMade = parseFloat((totalOffReb / numberOfGames).toFixed(1));
+      const defRebMade = parseFloat((totalDefReb / numberOfGames).toFixed(1));
+      const rebMade = parseFloat((totalReb / numberOfGames).toFixed(1));
+
+      const assistsMade = parseFloat((totalAssists / numberOfGames).toFixed(1));
+      const turnoversMade = parseFloat((totalTurnovers / numberOfGames).toFixed(1));
+      const stealsMade = parseFloat((totalSteals / numberOfGames).toFixed(1));
+      const blocksMade = parseFloat((totalBlocks / numberOfGames).toFixed(1));
+
+      const personalFouls = parseFloat((totalPersonalFouls / numberOfGames).toFixed(1));
+      const plusMinusPerGame = parseFloat((totalPlusMinus / numberOfGames).toFixed(1));
+
+      //  console.log(totalPlusMinus);
+      seasonAverages.push({
+        season: seasonName,
+        player,
+        team,
+        numberOfGames,
+        averageMinutesPerGame,
+        pointsPerGame,
+        fieldGoalsMade,
+        fieldGoalsAttempted,
+        fieldGoalPercentage,
+        treePointersMade,
+        treePointersAttempted,
+        treePointersPercentage,
+        freeThrowsMade,
+        freeThrowsAttempted,
+        freeThrowsPercentage,
+        defRebMade,
+        offRebMade,
+        rebMade,
+        assistsMade,
+        turnoversMade,
+        stealsMade,
+        blocksMade,
+        personalFouls,
+        plusMinusPerGame,
+      });
+    }
+
+    return seasonAverages;
+  }
+
+  static getAllPlayers(gameStatsArray) {
+    // Step 1: Group statistics by player
+    const groupedByPlayer = gameStatsArray.reduce((acc, gameStat) => {
+      const playerId = gameStat.player.id;
+      if (!acc[playerId]) {
+        acc[playerId] = {
+          id: playerId,
+          firstname: gameStat.player.firstname,
+          lastname: gameStat.player.lastname,
+          name: gameStat.player.firstname + ' ' + gameStat.player.lastname,
+          team: gameStat.team.code,
+          teamId: gameStat.team.id,
+        };
+      }
+      return acc;
+    }, {});
+
+    // Step 2: Map over the grouped players to create an array with only the desired stats
+    const players = Object.values(groupedByPlayer).map(player => ({
+      id: player.id,
+      name: player.name,
+      firstname: player.firstname,
+      lastname: player.lastname,
+      team: player.team,
+      teamId: player.teamId,
+    }));
+
+    return players;
+  }
+}
 export { StatsCalculator };

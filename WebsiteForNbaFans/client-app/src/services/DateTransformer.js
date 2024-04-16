@@ -30,6 +30,10 @@ class DateTransformer {
 
     static yearsInLeague(startYear) {
         const currentYear = new Date().getFullYear();
+        if (startYear === 0) {
+            return 'rookie';            
+        }
+
         return currentYear - startYear;
     }
 

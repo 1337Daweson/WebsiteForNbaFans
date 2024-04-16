@@ -19,6 +19,10 @@ import 'primevue/resources/themes/lara-light-green/theme.css';
 import Dropdown from 'primevue/dropdown';
 import InputSwitch from 'primevue/inputswitch';
 import TextClamp from 'vue3-text-clamp';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import InputText from 'primevue/inputtext';
+
 
 const pinia = createPinia();
 
@@ -42,5 +46,8 @@ app.component('PrimeCard', Card);
 app.component('ProgressSpinner', ProgressSpinner);
 app.component('DropDown', Dropdown);
 app.component('InputSwitch', InputSwitch);
+app.component('InputText', InputText);
+app.component('IconField', IconField);
+app.component('InputIcon', InputIcon);
 
 app.mount('#app');

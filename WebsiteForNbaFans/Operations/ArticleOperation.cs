@@ -4,16 +4,16 @@ using WebsiteForNbaFans.Repositories;
 
 namespace WebsiteForNbaFans.Operations
 {
-    public interface ITeamOperation
+    public interface IArticleOperation
     {
         Task<List<Team>> GetAll();
     }
-    public class TeamOperation : ITeamOperation
+    public class ArticleOperation : IArticleOperation
     {
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
 
-        public TeamOperation(IUnitOfWork unitOfWork, IMapper mapper)
+        public ArticleOperation(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;

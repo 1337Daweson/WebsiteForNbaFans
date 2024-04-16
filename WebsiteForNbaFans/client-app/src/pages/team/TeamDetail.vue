@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/attribute-hyphenation -->
 <template>
+  <LoadingModal :loaded="loaded" />
   <div class="bg-white w-1/2">
     <h2 />
   </div>
@@ -113,7 +114,7 @@ export default {
       const store = useTeamStore();
       const route = useRoute();
       const router = useRouter();
-
+      const loaded = computed(() => store.loaded);
       const team = computed(() => store.currentTeam);
       const roster = computed(() => store.roster);
 
@@ -129,6 +130,7 @@ export default {
       });
 
         return {
+          loaded,
           team,
           roster,
           DateTransformer,

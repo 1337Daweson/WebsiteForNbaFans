@@ -28,6 +28,13 @@ const items = ref([
   },
   {
     isChild: false,
+    label: 'Hráči',
+    command: () => {
+      router.push('/players');
+    },
+  },
+  {
+    isChild: false,
     label: 'Tabulky',
     command: () => {
       router.push('/standings');

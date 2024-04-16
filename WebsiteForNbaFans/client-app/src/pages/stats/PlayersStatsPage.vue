@@ -234,6 +234,7 @@ const getTeamIds = async () => {
 onMounted(async () => {
   if (teams.value === null || teams.value.length === 0) {
     await store.getTeams();
+    console.log('teams null');
   }
   if (stats.value === null || stats.value.length === 0) {
     await getTeamIds();        

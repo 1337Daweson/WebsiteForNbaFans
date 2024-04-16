@@ -16,6 +16,7 @@
     </div>
     <div class="bg-white w-full h-1/2 m-auto shadow-md">
       <PrimeCarousel
+        v-if="todayGames.length !== 0"
         :key="carouselKey"
         :page="currentPage"
         :value="todayGames"
@@ -63,13 +64,19 @@
           </div>
         </template>
       </PrimeCarousel>
+      <div
+        v-else
+        class="h-full p-9"
+      >
+        Dnes nejsou žádné zápasy
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useLeagueStore } from '../stores/leagueStore';
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 
 const leagueStore = useLeagueStore();
 const selectedDate = ref();
@@ -103,11 +110,17 @@ const toFirstPage = () => {
  carouselKey.value++;
 };
 
+watch(selectedDate, () => {
+ // Accessing todayGames here will trigger its re-computation
+ // This is a no-op, but it's enough to trigger the re-computation
+ todayGames.value;
+
+});
+
 
 
 onMounted(() => {
   const today = new Date();
-  leagueStore.getGamesPerSeason();
   today.setHours(0, 0, 0, 0);
   for (let i = 0; i <= 3; i++) {
     const date = new Date(today);

@@ -4,23 +4,23 @@ namespace WebsiteForNbaFans.Repositories
 {
     public interface IUnitOfWork
     {
-        ITeamRepository TeamRepository { get; }
+        IArticleRepository TeamRepository { get; }
         Task SaveChangesAsync(/*CancellationToken cancellationToken = default*/);
         void Save();
     }
     public class UnitOfWork : IUnitOfWork
     {
         private readonly NbaWebContext _context;
-        private readonly Lazy<ITeamRepository> teamRepository;
+        private readonly Lazy<IArticleRepository> teamRepository;
 
         public UnitOfWork(NbaWebContext nbaWebContext)
         {
             this._context = nbaWebContext;
-            this.teamRepository = new Lazy<ITeamRepository>(() => new TeamRepository(this._context));
+            this.teamRepository = new Lazy<IArticleRepository>(() => new ArticleRepository(this._context));
 
         }
 
-        public ITeamRepository TeamRepository => this.teamRepository.Value;
+        public IArticleRepository TeamRepository => this.teamRepository.Value;
 
         public void Save()
         {

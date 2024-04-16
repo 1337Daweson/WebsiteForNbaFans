@@ -24,6 +24,7 @@ export const useLeagueStore = defineStore('leagueStore', {
             try {
                 this.loaded = false;
                 const response = await HttpRequestor.get('Nba/GamesPerSeason');
+                // console.log(response.data.response);
                 this.games = response.data.response;
             } catch (error) {
                 console.error(error);
