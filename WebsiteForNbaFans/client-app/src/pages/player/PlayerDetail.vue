@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onBeforeMount } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useTeamStore } from '@/stores/teamStore';
 import { useRoute, useRouter } from 'vue-router';
 import { StatsCalculator } from '@/services/StatsHelper';
