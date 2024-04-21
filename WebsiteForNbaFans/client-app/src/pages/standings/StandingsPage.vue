@@ -18,7 +18,7 @@
                 <span class="text-xs font-mono w-40">
                   zajištěné playoffs
                 </span>
-                <div class="w-5 h-5 bg-opacity-10 bg-green-500" />
+                <div class="w-5 h-5 bg-opacity-10 bg-green-700" />
               </div>
               <div class="flex justify-start gap-3 items-center m-1">
                 <span class="text-xs font-mono w-40">

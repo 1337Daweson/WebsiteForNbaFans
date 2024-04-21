@@ -5,15 +5,13 @@ namespace WebsiteForNbaFans.Models;
 
 public partial class Article
 {
-    public int ArticleId { get; set; }
+    public int Id { get; set; }
 
     public string Title { get; set; } = null!;
 
     public string Content { get; set; } = null!;
 
-    public DateTime PublishedDate { get; set; }
+    public bool Homepage { get; set; }
 
-    public string? Author { get; set; }
-
-    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public string Img { get; set; } = null!;
 }

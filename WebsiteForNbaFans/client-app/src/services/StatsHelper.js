@@ -1,4 +1,5 @@
 class StatsCalculator {
+
   static calculatePlayerStats(gameStatsArray) {
     // console.log(gameStatsArray);
     // Step 1: Group statistics by player
@@ -311,7 +312,7 @@ class StatsCalculator {
   static calculatePlayerStatsPerSeason(playerStatsArray) {
     // Step 1: Group statistics by season
     const groupedBySeason = playerStatsArray.reduce((acc, playerStat) => {
-      console.log(playerStat);
+      // console.log(playerStat);
       const season = playerStat.season;
       let player = null;
       let team = null;
@@ -484,5 +485,74 @@ class StatsCalculator {
 
     return players;
   }
+
+  static groupPlayersByTeamId(players) {
+    const grouped = players.reduce((acc, player) => {
+       const teamId = player.team.id;
+       if (!acc[teamId]) {
+         acc[teamId] = [];
+       }
+       acc[teamId].push(player);
+       return acc;
+    }, {});
+   
+    // Convert the grouped object into an array of arrays
+    return Object.values(grouped);
+   }
+
+  static calculateTotalStatsByTeam(playersStats) {
+    const totalStats = playersStats.reduce((total, player) => {
+        total.points += player.points;
+        total.min += parseInt(player.min);
+        total.fgm += player.fgm;
+        total.fga += player.fga;
+        total.ftm += player.ftm;
+        total.fta += player.fta;
+        total.tpm += player.tpm;
+        total.tpa += player.tpa;
+        total.offReb += player.offReb;
+        total.defReb += player.defReb;
+        total.totReb += player.totReb;
+        total.assists += player.assists;
+        total.pFouls += player.pFouls;
+        total.steals += player.steals;
+        total.turnovers += player.turnovers;
+        total.blocks += player.blocks;
+        total.plusMinus += parseInt(player.plusMinus);
+        total.fgp += parseFloat(player.fgp);
+        total.tpp += parseFloat(player.tpp);
+        total.ftp += parseFloat(player.ftp);
+        return total;
+    }, {
+        points: 0,
+        min: 0,
+        fgm: 0,
+        fga: 0,
+        ftm: 0,
+        fta: 0,
+        tpm: 0,
+        tpa: 0,
+        offReb: 0,
+        defReb: 0,
+        totReb: 0,
+        assists: 0,
+        pFouls: 0,
+        steals: 0,
+        turnovers: 0,
+        blocks: 0,
+        plusMinus: 0,
+        fgp: 0,
+        tpp: 0,
+        ftp: 0,
+        comment: null,
+    });
+
+    // Calculate percentages and add them to the totalStats object
+    totalStats.fgp = ((totalStats.fgm / totalStats.fga) * 100).toFixed(1);
+    totalStats.tpp = ((totalStats.tpm / totalStats.tpa) * 100).toFixed(1);
+    totalStats.ftp = ((totalStats.ftm / totalStats.fta) * 100).toFixed(1);
+
+    return Object.entries(totalStats);
+}
 }
 export { StatsCalculator };

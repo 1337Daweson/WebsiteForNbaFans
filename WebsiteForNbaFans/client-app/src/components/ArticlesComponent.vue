@@ -1,7 +1,7 @@
 <template>
   <div class="h-full">
     <PrimeCarousel
-      :value="articles"
+      :value="dArticles"
       :num-visible="5"
       :num-scroll="3"
     >
@@ -42,19 +42,28 @@
     <PrimeButton
       class="text-2xl font-bold mb-4 border-2 button-class"
       label="Ostatní články"
+      @click="navigateToArticles"
     />
   </div>
 </template>
 
 <script setup>
-import { allArticles } from '@/services/ObjectsProvider.js';
+// import { allArticles } from '@/services/ObjectsProvider.js';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
-const articles = computed(() => allArticles.filter(article => article.homepage === true)); 
+import { useLeagueStore } from '../stores/leagueStore';
+
+const leagueStore = useLeagueStore();
+const dArticles = computed(() => leagueStore.articles.filter(article => article.homepage === true));
+// const articles = computed(() => allArticles.filter(article => article.homepage === true)); 
 const router = useRouter(); 
 
 const navigateToArticle = (id) => {
-  router.push('/articles/' + id);
+  router.push('/article/' + id);
+};
+
+const navigateToArticles = () => {
+  router.push('/articles');
 };
 
 </script>

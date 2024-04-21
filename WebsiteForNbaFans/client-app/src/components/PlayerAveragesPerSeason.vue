@@ -1,14 +1,10 @@
 <template>
-  <div class="bg-white mx-52 mt-10 mb-10 pb-2 ">
+  <div class="bg-white mx-52 mt-5 mb-10 pb-2 ">
     <DataTable 
       ref="dtb"
       :value="model"
       size="small"
-      :paginator="true"
-      paginator-position="top"
       :rows="20"
-      paginator-template="FirstPageLink PrevPageLink NextPageLink LastPageLink CurrentPageReport"
-      current-page-report-template="{first} do {last} z {totalRecords}"
       sort-field="season"
       :sort-order="-1"
       class="m-4 p-4"
@@ -185,15 +181,6 @@
         header="+/-"
         class="text-xs"
       />
-        
-        
-      <template #paginatorstart>
-        <div class="w-full flex flex-row justify-center">
-          <div class=" opacity-0 w-80" />
-          <div class=" opacity-0 w-80" />
-          <div class=" opacity-0 w-80" />
-        </div>
-      </template>
     </DataTable>
   </div>
 </template>

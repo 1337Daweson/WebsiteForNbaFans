@@ -2,7 +2,7 @@
   <LoadingModal :loaded="loaded" />
   <div  
     v-if="player && transformedStats.length > 0"
-    class="w-full flex flex-col mt-1 items-center mb-5"
+    class="w-full flex flex-col mt-1 items-center mb-3"
   >
     <div class="h-full bg-white border-b-2 border-[#f6f6f6] text-center flex flex-col items-center w-4/12">
       <div class="playerAvatar-content">

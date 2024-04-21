@@ -6,6 +6,132 @@
 
 :root {
 
+  --cavs-orange: #FF6F00;
+  --cavs-gold: #FFD700;
+  --cavs-navy: #000080;
+  --cavs-black: #000000;
+  --cavs-white: #FFFFFF;
+ 
+  --atl-red: #E31837;
+  --atl-volt-green: #006BB6;
+  --atl-charcoal: #2C2C2C;
+ 
+  --bkn-black: #000000;
+  --bkn-white: #FFFFFF;
+
+  
+  --cha-purple: #800080;
+  --cha-teal: #008080;
+  --cha-gray: #808080;
+  
+  --chi-red: #E31837;
+  --chi-black: #000000;
+  --chi-white: #FFFFFF;
+  
+  --cle-wine: #800000;
+  --cle-gold: #FFD700;
+  --cle-navy: #000080;
+  --cle-black: #000000;
+  --cle-white: #FFFFFF;
+  
+  --dal-royal-blue: #002A6A;
+  --dal-silver: #C0C0C0;
+  --dal-black: #000000;
+  --dal-white: #FFFFFF;
+  
+  --den-midnight-blue: #00008B;
+  --den-sunshine-yellow: #FFD700;
+  --den-flatirons-red: #FF6F00;
+  --den-white: #FFFFFF;
+  
+  --det-red: #E31837;
+  --det-royal: #696969;
+  --det-gray: #808080;
+  --det-white: #FFFFFF;
+  
+  --gsw-blue: #002A6A;
+  --gsw-gold: #FFD700;
+  
+  --hou-red: #E31837;
+  --hou-black: #000000;
+  --hou-white: #FFFFFF;
+  
+  --ind-blue: #002D62;
+  --ind-yellow: #FFFF00;
+  --ind-silver: #C0C0C0;
+  
+  --lac-red: #E31837;
+  --lac-blue: #4169E1;
+  --lac-black: #000000;
+  
+  --lal-purple: #800080;
+  --lal-gold: #FFD700;
+  --lal-black: #000000;
+  --lal-white: #FFFFFF;
+  
+  --mem-blue: #0000FF;
+  --mem-navy: #000080;
+  --mem-yellow: #FFFF00;
+  --mem-gray: #808080;
+  
+  --mia-red: #98002E;
+  --mia-black: #000000;
+  --mia-yellow: #FFFF00;
+  --mia-white: #FFFFFF;
+  
+  --mil-green: #008000;
+  --mil-cream: #FFFDD0;
+  --mil-white: #FFFFFF;
+  
+  --min-midnight-blue:  #0c2542;
+
+  --nyk-blue: #0000FF;
+  --nyk-orange: #FFA500;
+  --nyk-silver: #C0C0C0;
+  --nyk-black: #000000;
+
+  --nop-navy-blue: #000080;
+ 
+  --okc-blue: #0000FF;
+  --okc-sunset: #FF69B4;
+  --okc-blue: #0000FF;
+  --okc-yellow: #FFFF00;
+ 
+  --orl-blue: #0077c0;
+  --orl-silver: #C0C0C0;
+  --orl-white: #FFFFFF;
+  --orl-black: #000000;
+ 
+  --phi-blue: #0000FF;
+  --phi-red: #E31837;
+  --phi-white: #FFFFFF;
+
+  --phx-orange: #E56020;
+ 
+  --por-red: #E31837;
+  --por-black: #000000;
+  --por-white: #FFFFFF;
+ 
+  --sac-purple: #800080;
+  --sac-gray: #808080;
+  --sac-black: #000000;
+ 
+  --sas-silver: #C0C0C0;
+  --sas-black: #000000;
+ 
+  --tor-red: #E31837;
+  --tor-black: #000000;
+  --tor-white: #FFFFFF;
+ 
+  --utah-navy: #000080;
+  --utah-green: #008000;
+  --utah-yellow: #FFFF00;
+ 
+  --was-navy: #000080;
+  --was-red: #E31837;
+  --was-silver: #C0C0C0;
+  --was-white: #FFFFFF;
+
   --primary-50: 236 253 245;
     --primary-100: 209 250 229;
     --primary-200: 167 243 208;

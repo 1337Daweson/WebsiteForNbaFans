@@ -6,7 +6,8 @@ namespace WebsiteForNbaFans.Operations
 {
     public interface IArticleOperation
     {
-        Task<List<Team>> GetAll();
+        Task<List<Article>> GetArticlesAsync();
+        Task<Article> GetArticleByIdAsync(int id);
     }
     public class ArticleOperation : IArticleOperation
     {
@@ -19,12 +20,19 @@ namespace WebsiteForNbaFans.Operations
             this.mapper = mapper;
         }
 
-        public async Task<List<Team>> GetAll()
+        public async Task<Article> GetArticleByIdAsync(int id)
         {
-            var result = await this.unitOfWork.TeamRepository.GetAllAsync();
+            var result = await this.unitOfWork.ArticleRepository.GetArticleByIdAsync(id);
+
+            return this.mapper.Map<Article>(result);
+        }
+
+        public async Task<List<Article>> GetArticlesAsync()
+        {
+            var result = await this.unitOfWork.ArticleRepository.GetAllAsync();
 
             return result
-                .Select(team => this.mapper.Map<Team>(team))
+                .Select(team => this.mapper.Map<Article>(team))
                 .ToList();
         }
     }

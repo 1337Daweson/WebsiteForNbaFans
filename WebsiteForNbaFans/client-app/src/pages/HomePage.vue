@@ -29,6 +29,7 @@ const getTeamIds = async () => {
 onMounted(async () =>{
   // await teamStore.getTeams();
   await getTeamIds();
+  await leagueStore.getArticles();
 });
 </script>
 

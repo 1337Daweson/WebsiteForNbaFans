@@ -42,9 +42,9 @@ namespace WebsiteForNbaFans
 
 
 
-            //builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
-            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //builder.Services.AddScoped<IArticleOperation, ArticleOperation>();
+            builder.Services.AddDbContext<NbaWebContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IArticleOperation, ArticleOperation>();
             builder.Services.AddMemoryCache();
             builder.Services.AddSingleton<ICacher, Cacher>();
             builder.Services.AddHttpClient("RapidApiOperation", (serviceProvider, client) =>

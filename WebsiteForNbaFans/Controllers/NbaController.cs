@@ -21,16 +21,19 @@ namespace WebsiteForNbaFans.Controllers
         private readonly IHttpClientFactory clientFactory;
         private readonly IRapidApiOperation apiOperation;
         private readonly ICacher cacher;
+        private readonly IArticleOperation articleOperation;
 
         public NbaController(IOptions<Api> appSettings,
             IHttpClientFactory clientFactory,
             IRapidApiOperation apiOperation,
+            IArticleOperation articleOperation,
             ICacher chacher)
         {
             this.appSettings = appSettings.Value;
             this.clientFactory = clientFactory;
             this.apiOperation = apiOperation;
             this.cacher = chacher;
+            this.articleOperation = articleOperation;
 
         }
 
@@ -180,6 +183,32 @@ namespace WebsiteForNbaFans.Controllers
 
             var response = await this.apiOperation.GetPlayerStats(playerId, season);
             cacher.Set("playerStats" + playerId + season, response);
+
+            return Ok(response);
+        }
+
+        [HttpGet(nameof(Articles))]
+        public async Task<IActionResult> Articles()
+        {
+            return Ok(await this.articleOperation.GetArticlesAsync());
+        }
+
+        [HttpGet(nameof(Article))]
+        public async Task<IActionResult> Article(int id)
+        {
+            return Ok(await this.articleOperation.GetArticleByIdAsync(id));
+        }
+
+        [HttpGet(nameof(PlayerStatsPerGame))]
+        public async Task<IActionResult> PlayerStatsPerGame(int gameId)
+        {
+            if (cacher.TryGetValue("playerStatsPerGame" + gameId, out string data))
+            {
+                return Ok(data);
+            }
+
+            var response = await this.apiOperation.GetPlayerStatsByGame(gameId);
+            cacher.Set("playerStatsPerGame" + gameId, response);
 
             return Ok(response);
         }

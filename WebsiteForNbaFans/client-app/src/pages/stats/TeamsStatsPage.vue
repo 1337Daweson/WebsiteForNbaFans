@@ -277,7 +277,7 @@ onMounted(async () => {
     await getTeamIds();        
   }
 
-  leagueStore.getGamesPerSeason();
+  await leagueStore.getGamesPerSeason();
 });
 
 </script>
@@ -289,5 +289,17 @@ onMounted(async () => {
     color: white !important;
     background-color: white !important;
 }   
+
+.gloss {
+  border-color: #dfe7f1;
+  outline-width: 0cm;
+  outline-offset: 0cm;
+  
+}
+
+.gloss:hover {
+  background-color: #dfe7f1;
+  color: white;
+}
 
 </style>

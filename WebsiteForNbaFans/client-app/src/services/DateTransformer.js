@@ -15,6 +15,12 @@ class DateTransformer {
         return age;
     }
 
+    static toISOLocale(isoDate) {
+        const date = new Date(isoDate);
+        return date.toISOString();
+    }
+
+
     static toCzLocale(isoDate) {
         const date = new Date(isoDate);
         const day = date.getDate();

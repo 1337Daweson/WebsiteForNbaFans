@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { DateTransformer } from '../services/DateTransformer';
 
 /**
  * HttpRequestService:
@@ -17,18 +18,18 @@ export default class HttpRequestor {
   /**
      * JS Date Transformer - transforms JS dates to format accepted by API
      */
-//   static dateTransformer = (data) => {
-//     if (data instanceof Date) {
-//       return DateTransformer.toISOLocale(data);
-//     }
-//     if (Array.isArray(data)) {
-//       return http://data.map(val => this.dateTransformer(val));
-//     }
-//     if (typeof data === 'object' && data !== null) {
-//       return Object.fromEntries(Object.entries(data).map(([key, val]) => [key, this.dateTransformer(val)]));
-//     }
-//     return data;
-//   };
+  static dateTransformer = (data) => {
+    if (data instanceof Date) {
+      return DateTransformer.toISOLocale(data);
+    }
+    if (Array.isArray(data)) {
+      return 'http:' + '//'+ data.map(val => this.dateTransformer(val));
+    }
+    if (typeof data === 'object' && data !== null) {
+      return Object.fromEntries(Object.entries(data).map(([key, val]) => [key, this.dateTransformer(val)]));
+    }
+    return data;
+  };
 
   static #axios = axios.create();
 

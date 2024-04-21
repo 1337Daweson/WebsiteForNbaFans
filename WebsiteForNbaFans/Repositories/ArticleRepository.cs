@@ -24,7 +24,7 @@ namespace WebsiteForNbaFans.Repositories
 
         public Task<Article?> GetArticleByIdAsync(int id)
         {
-            return this._context.Articles.AsNoTracking().FirstOrDefaultAsync(x => x.ArticleId == id);
+            return this._context.Articles.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace WebsiteForNbaFans.Mapper
     {
         public NbaWebMapper()
         {
-            CreateMap<Models.Team, DTO.Team>();
+            CreateMap<Models.Article, DTO.Article>();
         }
     }
 }

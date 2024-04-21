@@ -6,6 +6,10 @@ export const useLeagueStore = defineStore('leagueStore', {
         loaded: false,
         standings: [],
         games: [],
+        articles: [],
+        currentArticle: null,
+        currentGame: null,
+        gameStats: [],
     }),
 
     actions: {
@@ -26,6 +30,43 @@ export const useLeagueStore = defineStore('leagueStore', {
                 const response = await HttpRequestor.get('Nba/GamesPerSeason');
                 // console.log(response.data.response);
                 this.games = response.data.response;
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+        async getArticles() {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/Articles');
+                // console.log(response.data.response);
+                this.articles = response.data;
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+        async getArticle(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/Article', { id });
+                // console.log(response.data.response);
+                this.currentArticle = response.data;
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loaded = true;
+            }
+        },
+
+        async GetPlayerStatsPerGame(id) {
+            try {
+                this.loaded = false;
+                const response = await HttpRequestor.get('Nba/PlayerStatsPerGame', { gameId: id });
+                // console.log(response.data.response);
+                this.gameStats = response.data.response;
             } catch (error) {
                 console.error(error);
             } finally {

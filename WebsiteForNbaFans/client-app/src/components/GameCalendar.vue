@@ -26,7 +26,12 @@
         class="w-3/6"
       >
         <template #item="slotProps">
-          <div class=" w-full border-2 border-spacing-28 surface-border rounded m-2 p-3 bg-slate-100">
+          <div
+            class=" w-full border-2 border-spacing-28 surface-border rounded m-2 p-3 bg-slate-100"
+            :class="{'mousePointer': slotProps.data.status.long === 'Finished'}"
+            @click="navigateToGame(slotProps.data)"
+          >
+            <!-- <RouterLink :to="'/game/' + slotProps.data.id"> -->
             <div class="mb-3">
               <div class="relative mx-auto">
                 <div class="flex flex-row items-center w-full h-full">
@@ -61,6 +66,7 @@
                 </div>                
               </div>
             </div>
+            <!-- </RouterLink> -->
           </div>
         </template>
       </PrimeCarousel>
@@ -75,10 +81,12 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import { useLeagueStore } from '../stores/leagueStore';
 import { computed, ref, onMounted, watch } from 'vue';
 
 const leagueStore = useLeagueStore();
+const router = useRouter();
 const selectedDate = ref();
 const dateOptions = [];
 const hideScores = ref(false);
@@ -108,6 +116,13 @@ const todayGames = computed(() => games.value.filter(game => {
 const toFirstPage = () => {
   currentPage.value = 0;
  carouselKey.value++;
+};
+
+const navigateToGame = (game) => {
+  if (game.status.long === 'Finished') {
+    leagueStore.currentGame = todayGames.value.find(g => g.id === game.id);
+    router.push('/game/' + game.id);
+  }
 };
 
 watch(selectedDate, () => {
@@ -146,5 +161,9 @@ onMounted(() => {
 
 button.p-link {
     background-color: blue !important;
+}
+
+.mousePointer:hover {
+  cursor: pointer;
 }
 </style>

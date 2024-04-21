@@ -22,6 +22,7 @@ import TextClamp from 'vue3-text-clamp';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
+import Chart from 'primevue/chart';
 
 
 const pinia = createPinia();
@@ -49,5 +50,6 @@ app.component('InputSwitch', InputSwitch);
 app.component('InputText', InputText);
 app.component('IconField', IconField);
 app.component('InputIcon', InputIcon);
+app.component('PrimeChart', Chart);
 
 app.mount('#app');

@@ -9,32 +9,16 @@
         :paginator="true" 
         :rows="10"
         :rows-per-page-options="[5, 10, 20, 50]"
-        paginator-template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown "
+        paginator-template="FirstPageLink PrevPageLink NextPageLink LastPageLink CurrentPageReport"
         current-page-report-template="{first} do {last} z {totalRecords}"
         class="m-4 p-4"
         sort-field="lastname"
         :sort-order="1"
-        :global-filter-fields="['lastname', 'firstname']"
+        :global-filter-fields="['lastname', 'firstname', 'fullname']"
+        paginator-position="top"
       >
         <template #header>
-          <div class="flex justify-content-between">
-            <PrimeButton
-              type="button"
-              icon="pi pi-filter-slash"
-              label="Clear"
-              outlined
-              @click="clearFilter()"
-            />
-            <IconField icon-position="left">
-              <InputIcon>
-                <i class="pi pi-search" />
-              </InputIcon>
-              <InputText
-                v-model="filters['global'].value"
-                placeholder="Keyword Search"
-              />
-            </IconField>
-          </div>
+          <h1>SOUPISKA HRÁČŮ LIGY</h1>
         </template>
         <template #filter="{ filterModel }">
           <InputText
@@ -50,13 +34,14 @@
           class="w-1/12 text-xs"        
         />
         <PrimeColumn
-          field="lastname"
+          field="fullname"
           header="Hráč"
           class="w-4/12 text-xs"
         >
           <template #body="slotProps">
             <RouterLink :to="'/player/' + slotProps.data.id">
-              {{ slotProps.data.firstname + ' ' + slotProps.data.lastname }}
+              <!-- {{ slotProps.data.firstname + ' ' + slotProps.data.lastname }}  -->
+              {{ slotProps.data.fullname }}
             </RouterLink>
             <span />
           </template>
@@ -132,6 +117,29 @@
           header="Škola"
           class="w-2/12 text-xs"
         />
+        <template #paginatorstart>
+          <div class="w-full">
+            <div class="flex flex-row gap-x-1 justify-evenly w-full h-full">
+              <PrimeButton
+                class="border-2 gloss"
+                icon="pi pi-filter-slash"
+                label="Reset"
+                @click="clearFilter()"
+              />
+              <InputText
+                v-model="filters['global'].value"
+                class="border-2 text-start w-2/3 self-center" 
+                placeholder="Hledat.."
+                icon="pi pi-search"
+              />
+            </div>
+            <div class=" opacity-0 w-80 h-full" />
+            <div class=" opacity-0 w-80 h-full" />
+            <div class=" opacity-0 w-80" />
+            <div class=" opacity-0 w-80" />
+            <div class=" opacity-0 w-80" />
+          </div>
+        </template>
       </DataTable>
     </div>
   </div>
@@ -153,7 +161,13 @@ const allPlayers = computed(() => {
     curr.players.forEach(player => {
       if (!uniqueIds.has(player.id)) {
         uniqueIds.add(player.id);
-        acc.push(player);
+        // Create a new object that includes all properties of the player object
+        // and adds a new property 'fullname' which is a combination of firstname and lastname
+        const playerWithFullName = {
+          ...player,
+          fullname: `${player.firstname} ${player.lastname}`,
+        };
+        acc.push(playerWithFullName);
       }
     });
     return acc;
@@ -165,6 +179,7 @@ const filters = ref();
 const initFilters = () => {
     filters.value = {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        fullname: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
         firstname: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
         lastname: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
     };
@@ -189,4 +204,21 @@ onMounted(  async () => {
 
 <style  scoped>
 
+.gloss {
+  border-color: #dfe7f1;
+  outline-width: 0cm;
+  outline-offset: 0cm;
+  text-align: center;
+  
+}
+
+button.gloss   >>> span {
+  align-self: center;
+
+}
+
+.gloss:hover {
+  background-color: #dfe7f1;
+  color: white;
+}
 </style>
