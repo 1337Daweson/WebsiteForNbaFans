@@ -486,19 +486,58 @@ class StatsCalculator {
     return players;
   }
 
-  static groupPlayersByTeamId(players) {
-    const grouped = players.reduce((acc, player) => {
-       const teamId = player.team.id;
-       if (!acc[teamId]) {
-         acc[teamId] = [];
-       }
-       acc[teamId].push(player);
-       return acc;
-    }, {});
+  // static groupPlayersByTeamId(players, game) {
+  //   const grouped = players.reduce((acc, player) => {
+  //      const teamId = player.team.id;
+  //      if (!acc[teamId]) {
+  //        acc[teamId] = [];
+  //      }
+  //      acc[teamId].push(player);
+  //      return acc;
+  //   }, {});
    
+  //   // Convert the grouped object into an array of arrays
+  //   return Object.values(grouped);
+  // }
+
+  static groupPlayersByTeamId(players, game) {
+    const grouped = players.reduce((acc, player) => {
+        const teamId = player.team.id;
+        if (!acc[teamId]) {
+            acc[teamId] = [];
+        }
+        acc[teamId].push(player);
+        return acc;
+    }, {});
+
     // Convert the grouped object into an array of arrays
-    return Object.values(grouped);
-   }
+    let teamsArray = Object.values(grouped);
+
+    // Function to move an item from one index to another in an array
+    const moveItem = (array, from, to) => {
+        const item = array[from];
+        array.splice(from, 1);
+        array.splice(to, 0, item);
+        return array;
+    };
+
+    // Check if the visitors team exists in the grouped teams
+    const visitorsTeamIndex = teamsArray.findIndex(team => team[0].team.id === game.teams.visitors.id);
+    // Check if the home team exists in the grouped teams
+    const homeTeamIndex = teamsArray.findIndex(team => team[0].team.id === game.teams.home.id);
+
+    // If the visitors team exists, move it to the beginning of the array
+    if (visitorsTeamIndex > -1) {
+        teamsArray = moveItem(teamsArray, visitorsTeamIndex, 0);
+    }
+
+    // If the home team exists and is not already the first team, move it to the second position
+    if (homeTeamIndex > -1 && homeTeamIndex !== 0) {
+        teamsArray = moveItem(teamsArray, homeTeamIndex, 1);
+    }
+
+    return teamsArray;
+  }
 
   static calculateTotalStatsByTeam(playersStats) {
     const totalStats = playersStats.reduce((total, player) => {

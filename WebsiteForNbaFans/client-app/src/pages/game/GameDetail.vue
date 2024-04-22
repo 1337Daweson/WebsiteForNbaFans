@@ -5,8 +5,8 @@
       v-if="game"
       class="p-5 w-1/2"
     >
-      <div class="w-full bg-white border-2">
-        <table>
+      <div class="w-full bg-white">
+        <table class="text-xs">
           <tr>
             <th>TÝM</th>
             <th>Q1</th>
@@ -48,7 +48,7 @@
   <DataTable 
     v-if="game"
     ref="dtb"
-    :value="groupedStats[1]"
+    :value="groupedStats[0]"
     size="small"
     :rows="20"
     class="m-4 p-4"
@@ -60,7 +60,7 @@
     <PrimeColumn 
       field="player.firstname"
       header="Hráč"
-      class="text-xs w-1/12"
+      class="text-xs w-56"
     >
       <template #body="slotProps">
         {{ slotProps.data.player.firstname }} {{ slotProps.data.player.lastname }}  
@@ -191,7 +191,7 @@
   <DataTable 
     v-if="game"
     ref="dtb"
-    :value="groupedStats[0]"
+    :value="groupedStats[1]"
     size="small"
     :rows="20"
     class="m-4 p-4"
@@ -203,7 +203,7 @@
     <PrimeColumn 
       field="player.firstname"
       header="Hráč"
-      class="text-xs w-1/12"
+      class="text-xs w-56"
     >
       <template #body="slotProps">
         {{ slotProps.data.player.firstname }} {{ slotProps.data.player.lastname }}  
@@ -348,10 +348,10 @@ const games = computed(() => leagueStore.finishedGames);
 
 const gameStats = computed(() => leagueStore.gameStats);
 
-const groupedStats = computed(() => StatsCalculator.groupPlayersByTeamId(gameStats.value));
+const groupedStats = computed(() => StatsCalculator.groupPlayersByTeamId(gameStats.value, game.value));
 
-const visitorTotalStats = computed(() => StatsCalculator.calculateTotalStatsByTeam(groupedStats.value[1]));
-const homeTotalStats = computed(() => StatsCalculator.calculateTotalStatsByTeam(groupedStats.value[0]));
+const visitorTotalStats = computed(() => StatsCalculator.calculateTotalStatsByTeam(groupedStats.value[0]));
+const homeTotalStats = computed(() => StatsCalculator.calculateTotalStatsByTeam(groupedStats.value[1]));
 
 
 const chartData = ref();
@@ -423,7 +423,7 @@ const getTeamColor = (teamName) => {
         'Golden State Warriors': '--gsw-blue',
         'Houston Rockets': '--hou-red',
         'Indiana Pacers': '--ind-yellow',
-        'Los Angeles Clippers': '--lac-blue',
+        'LA Clippers': '--lac-silver',
         'Los Angeles Lakers': '--lal-gold',
         'Memphis Grizzlies': '--mem-blue',
         'Miami Heat': '--mia-red',
@@ -493,14 +493,11 @@ table {
 }
 
 td, th {
-  border: 1px solid #be4949;
+  border: 1px solid #e5e7eb;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #e0e0e0;
-}
 
 
 </style>
