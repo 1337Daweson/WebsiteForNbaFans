@@ -22,7 +22,7 @@
           Veškerá data, které vidíte na této stránce pochází z veřejně dostupné NbaAPI od RapidAPI. Články jsou převzaté z jiných webových stránek pro potřebu bakalářské práce a žádné z nich nevlastním.
         </p>
         <p class="mt-5">
-          Pokud jste dočetli až jsem Děkuji za váš čas.          
+          Pokud jste dočetli až jsem, Děkuji za váš čas.          
         </p>
         <p>
           David Netušil
